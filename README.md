@@ -34,15 +34,28 @@ git clone https://github.com/shaunlinx/beachsolo-agent-kit.git ~/.claude/skills/
 
 ```
 beachsolo-agent-kit/
-├── SKILL.md                    # Agent 技能定义（五步工作流，唯一入口）
-├── data-contract.json          # 数据包 JSON Schema（snapshot_version=1）
+├── SKILL.md                      # Agent 技能定义（六步工作流，唯一入口）
+├── resources.md                  # 专项练习资源库与处方触发规则（4 个外部链接）
+├── data-contract.json            # 数据包 JSON Schema（schemaVersion=1）
 ├── scripts/
-│   ├── validate-package.mjs    # 校验数据包完整性（字段、类型、版本）
-│   └── report-scaffold.mjs     # 生成标准目录结构骨架
+│   ├── validate-package.mjs      # 校验数据包完整性（字段、类型、版本）
+│   ├── report-scaffold.mjs       # 生成标准目录结构骨架（含知识库目录）
+│   ├── generate-report.mjs       # 生成 ECharts 可视化诊断报告（独立 HTML，零依赖）
+│   └── build-knowledge-index.mjs # 错题沉淀为可检索知识库 + 重建索引（幂等）
 ├── examples/
-│   └── sample-package.json     # 脱敏样例数据包（字段结构完整，数据为虚构）
+│   └── sample-package.json       # 脱敏样例数据包（字段结构完整，数据为虚构）
 └── README.md
 ```
+
+## 核心能力
+
+- **可视化诊断**：`generate-report.mjs` 产出独立 HTML 报告——模块正确率排序、
+  逐题用时分布（600s 截断标注）、五态饼图、行为事件时间线（暂停区带）、异常信号清单。
+- **可检索错题知识库**：`build-knowledge-index.mjs` 把每次错题按模块沉淀为独立
+  markdown（题干/解析/错因/历次出现记录），Agent 可用 Grep 按考点检索历史错题。
+- **弱项资源处方**：Agent 按 `resources.md` 的触发规则，在识别到模块弱项时
+  推荐对应的专项练习工具箱（数资/言语/政治）或综合学习资源。
+- **跨会话幂等**：`beachsolo/profile.json` 记录已处理会话，重复数据包不重复分析。
 
 ---
 
@@ -54,7 +67,7 @@ beachsolo-agent-kit/
 
    > 请处理这个数据包，按技能工作流执行。
 
-4. Agent 自动完成幂等检查 → 首诊报告 → 专项计划 → 错题集，写入 `beachsolo/` 目录；
+4. Agent 自动完成幂等检查 → 可视化报告 + 文字首诊 → 错题入库 → 资源处方 → 专项计划，写入 `beachsolo/` 目录；
 5. 下次拿到新数据包，直接再发一次，Agent 增量处理，不重复分析旧会话。
 
 ---
@@ -101,6 +114,22 @@ node scripts/report-scaffold.mjs [目标目录，默认 ./beachsolo]
 ```
 
 创建 `beachsolo/` 标准目录结构（已存在则跳过，不覆盖已有文件）。
+
+### 生成可视化诊断报告
+
+```bash
+node scripts/generate-report.mjs path/to/beachsolo-attempt-xxx.json [输出.html]
+```
+
+默认输出 `beachsolo/reports/diagnosis-<id8>-<日期>.html`，浏览器打开即可，无需本地依赖。
+
+### 错题沉淀与知识库索引
+
+```bash
+node scripts/build-knowledge-index.mjs path/to/beachsolo-attempt-xxx.json [beachsolo目录]
+```
+
+提取本次错题写入 `beachsolo/knowledge/<模块>/`，重建 `INDEX.md`；同一数据包重复执行不会重复写入。
 
 ---
 

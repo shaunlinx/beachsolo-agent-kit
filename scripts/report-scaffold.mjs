@@ -8,7 +8,7 @@ import { join, resolve } from 'path';
 
 const base = resolve(process.argv[2] || 'beachsolo');
 
-const dirs = ['', 'reports', 'plans', 'strategies', 'mistake-books'];
+const dirs = ['', 'reports', 'plans', 'strategies', 'mistake-books', 'knowledge'];
 
 for (const d of dirs) {
   const p = join(base, d);
