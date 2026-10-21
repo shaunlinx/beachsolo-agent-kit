@@ -20,6 +20,23 @@ for (const d of dirs) {
   }
 }
 
+const logPath = join(base, 'DELIVERY-LOG.md');
+if (!existsSync(logPath)) {
+  writeFileSync(
+    logPath,
+    [
+      '# BeachSOLO 交付台账',
+      '',
+      '> 每次数据包会话的全部交付物集中记录于此，只追加不改写历史。',
+      '',
+    ].join('\n'),
+    'utf8',
+  );
+  console.log(`  初始化: ${logPath}`);
+} else {
+  console.log(`  已存在，跳过: ${logPath}`);
+}
+
 const profilePath = join(base, 'profile.json');
 if (!existsSync(profilePath)) {
   const initial = {
@@ -27,7 +44,13 @@ if (!existsSync(profilePath)) {
     instructionsVersion: 1,
     installedAt: new Date().toISOString(),
     processedSessions: [],
-    profile: { weakSections: [], hesitationTendency: '', notes: '' },
+    profile: {
+      weakSections: [],
+      hesitationTendency: '',
+      notes: '',
+      masteredPoints: [],
+      pendingPoints: [],
+    },
   };
   writeFileSync(profilePath, JSON.stringify(initial, null, 2), 'utf8');
   console.log(`  初始化: ${profilePath}`);
