@@ -1,7 +1,9 @@
 # MEDIA-PLAYBOOK · 多模态教学规范
 
-> beachsolo-coach（SKILL.md v5）的教学媒介配套。**每题讲解前必须按错因类型读取对应小节**。
+> beachsolo-coach（SKILL.md v6 · artifact-first）的教学媒介配套。**每题讲解前必须按错因类型读取对应小节**。
 > 核心：讲解禁止只用文字。按"错因类型 → 媒介"路由，用用户最容易吸收的方式教。
+> **归档硬规则**：所有生成类媒介产物必须下载归档 `beachsolo/media/` 并回读验证，
+> 禁止直接交付临时短链——具体执行见 `DOCS/TOOL-CONTRACTS.md` §1。
 
 ## 0. 媒介路由表（先查这张表）
 
