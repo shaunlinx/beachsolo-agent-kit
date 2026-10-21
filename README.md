@@ -34,36 +34,42 @@ git clone https://github.com/shaunlinx/beachsolo-agent-kit.git ~/.claude/skills/
 
 ```
 beachsolo-agent-kit/
-├── SKILL.md                      # Agent 技能定义（六步工作流，唯一入口）
-├── resources.md                  # 专项练习资源库与处方触发规则（4 个外部链接）
+├── SKILL.md                      # Agent 技能定义（v4 可视化带教闭环，唯一入口）
+├── VISUAL-PLAYBOOK.md            # 带教交互可视化规范（V-01~V-10 模板，执行前必读）
+├── resources.md                  # 专项练习资源库与处方触发规则（处方卡规范）
 ├── data-contract.json            # 数据包 JSON Schema（schemaVersion=1）
 ├── scripts/
 │   ├── validate-package.mjs      # 校验数据包完整性（字段、类型、版本）
 │   ├── report-scaffold.mjs       # 生成标准目录结构骨架（含知识库目录）
 │   ├── generate-report.mjs       # 生成 ECharts 可视化诊断报告（独立 HTML，零依赖）
-│   └── build-knowledge-index.mjs # 错题沉淀为可检索知识库 + 重建索引（幂等）
+│   ├── build-knowledge-index.mjs # 错题沉淀为可检索知识库 + 重建索引（幂等）
+│   └── build-remediation-plan.mjs # 待复查知识点 → 3 日巩固计划（写入 plans/）
+├── variants/
+│   ├── README.md                 # 变式题库检索说明
+│   ├── index.json                # 知识点 → 题目文件索引
+│   └── political-theory.json     # 政治类变式题（首批 3 题已入库）
 ├── examples/
 │   └── sample-package.json       # 脱敏样例数据包（字段结构完整，数据为虚构）
 └── README.md
 ```
 
-## 核心能力：交互式带教闭环
+## 核心能力：可视化带教闭环（v4）
 
-每次处理数据包，Agent 按 SKILL.md 带用户走完一轮闭环：
+每次处理数据包，Agent 按 SKILL.md 带用户走完一轮**可视化带教闭环**，
+每个环节用图表/卡片呈现（规范见 VISUAL-PLAYBOOK.md），不输出纯文字长段落：
 
-1. **客观事实展示**：`generate-report.mjs` 产出可视化诊断报告（模块正确率、
-   逐题用时、五态分布、事件时间线、异常清单），只摆事实不下结论；
-2. **考察知识点识别**：逐题判定考察的具体知识点，写回知识库，并检索历史同点错题；
-3. **错因确认**：结合行为信号（誊写不一致/改错/盲答/超时）与答题内容形成假设，
-   逐条与用户确认，不强加结论；
-4. **查证讲解**：检索知识库 + 数据包解析 + 联网，解释答案为什么对、错误为什么发生；
-5. **理解确认循环**：不理解则针对疑惑继续解答，直到理解；
-6. **举一反三实测**：提供 2–3 道变式题（注明来源），全对=已掌握，仍错=未掌握，
-   按 `resources.md` 推荐专项练习工具箱或学习资源巩固；
+1. **事实层可视化首诊**：3 个关键事实卡 + 模块正确率图 + 异常清单 + 报告存档；
+2. **行为模式带教**：用事件时间线先带"节奏/取舍/誊写"，再进知识点；
+3. **一题一教**：知识点卡 → 错因路径图（用户先自述，教练补证据）→ 推理链对比讲解
+   → 即时小测（主动回忆）→ 变式实测；
+4. **补救闭环**：变式未过 → 二次讲解（换角度）+ 二次变式 → 通过=掌握，再不过=待复查；
+5. **掌握判定**：状态徽章 + 进度条；待复查 → 3 日巩固计划 + 间隔复测约定；
+6. **资源处方**：处方卡（资源 + 触发证据 + 使用建议 + 跟进状态）；
 7. **交付台账**：每次会话的全部产出集中追加到 `beachsolo/DELIVERY-LOG.md`。
 
-配套机制：`build-knowledge-index.mjs` 把每次错题沉淀为可检索知识库；
-`profile.json` 记录已掌握/待复查知识点与已处理会话（幂等）。
+配套机制：`build-knowledge-index.mjs` 沉淀错题知识库；`variants/` 提供按知识点索引的
+变式题库（Agent 优先取题，原创题回写）；`build-remediation-plan.mjs` 生成巩固计划；
+`profile.json` 记录掌握/待复查知识点、行为模式画像、处方跟进与已处理会话（幂等）。
 
 ---
 

@@ -1,0 +1,21 @@
+{
+  "schema": "beachsolo-variants@1",
+  "updatedAt": "2026-10-22",
+  "index": [
+    {
+      "knowledgePoint": "政治理论·科学体系板块定位（十个明确/十四个坚持）",
+      "file": "political-theory.json",
+      "ids": ["vt-001"]
+    },
+    {
+      "knowledgePoint": "政治理论·党的建设布局（政治建设摆在首位）",
+      "file": "political-theory.json",
+      "ids": ["vt-002"]
+    },
+    {
+      "knowledgePoint": "政治理论·立法工作格局固定表述（党委领导、人大主导、政府依托、各方参与）",
+      "file": "political-theory.json",
+      "ids": ["vt-003"]
+    }
+  ]
+}
