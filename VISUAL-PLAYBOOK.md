@@ -1,117 +1,110 @@
-# VISUAL-PLAYBOOK · 带教交互可视化规范
+# VISUAL-PLAYBOOK v2 · 带教交互可视化规范
 
-> 本文件是 beachsolo-coach（SKILL.md v4）的呈现配套。**每次带教会话开始前必须完整读取本文件一次**。
-> 原则：带教过程禁止"一大段文字讲完就过"，每个环节用可视化呈现，文字只作图内补充。
+> beachsolo-coach（SKILL.md v4）的呈现配套。**每次带教会话开始前必须完整读取本文件一次**。
+>
+> v2 核心升级：从"多张孤立卡片堆叠"升级为**一题一图 · 三幕叙事 · 可降级交互**。
+> 阅读体验对标"教练门诊单"：一屏读完全题带教，图随对话节奏逐步展开，禁止一次堆多卡。
 
-## 0. 渲染硬约束（违反即渲染失败）
+## 0. 设计哲学（先读这段，模板只是落点）
 
-- **HTML renderer 块**：起始行逐字为 ` ```html type="renderer" `，结束行逐字为 ` ``` `，两者独占一行；块内**禁止** `<!DOCTYPE>`、`<head>`、`<body>`、`<TEXT>`。
+1. **一题一图**：每题的证据、轨迹、断点、推理、锚点整合在**一张纵向信息图**里，
+   用 ①②③ 编号 + 分区引导阅读顺序；而不是 4 张并列的小卡（并列小卡=贴片感，生硬）。
+2. **三幕节奏**：带教按对话流分三幕，每幕只出现一张图：
+   - 第一幕·还原：出示"你的作答轨迹 + 时间戳"，断点**留白不揭** → 请用户自述错因；
+   - 第二幕·揭秘：用户自述后，揭示"断点标注 + 正确链 vs 错误路径 + 记忆锚点"；
+   - 第三幕·检验：小测/变式题卡，判分反馈。
+3. **渐进揭示**：结论不提前给。先让用户看证据、开口说，再揭答案——这是教学不是展示。
+4. **交互增强、静态可读**：点击节点/断点展开详情、时间线步进回放、hover 高亮都是**增强**；
+   无 JS / 渲染器降级时，静态图本身必须完整可读（信息不全靠交互）。
+5. **排版质量**：统一色板、图标语义、字号层级、留白节奏、细边框+轻阴影；拒绝粗制 div 卡片。
+
+## 1. 渲染硬约束（违反即渲染失败）
+
+- **HTML renderer 块**：起始行逐字 ` ```html type="renderer" `，结束行逐字 ` ``` `，各独占一行；块内**禁止** `<!DOCTYPE>`/`<head>`/`<body>`/`<TEXT>`。
 - 首块写法：`<html style="margin:0;padding:0;">` 紧跟非空 `<title>页面标题</title>`，再写透明根 div；同一文档只写一个 title。
-- 布局：根容器 `width:100%;box-sizing:border-box`，自然撑高，**禁止** `100vh`/`height:100%`；多列用 `display:flex;flex-wrap:wrap`，长文字不得溢出；正文 ≥14px。
-- **ECharts**：输出完整小写 `echarts` option（含 data 真实值），不输出初始化代码/HTML 包裹。
-- **静态优先**：初始画面即可读懂主结论；交互必须揭示新状态，禁止装饰动画。
-- 示例数据只出现在"模板示例"中；真实输出必须填真实数据，并在图注写明数据口径。
+- 布局：根容器 `width:100%;box-sizing:border-box`，自然撑高，**禁止** `100vh`/`height:100%`；多列 `display:flex;flex-wrap:wrap`，长文字不溢出；正文 ≥14px，行高 1.6-1.8。
+- **ECharts**：输出完整小写 `echarts option`（真实数据），不输出初始化代码/HTML 包裹。
+- **交互脚本**：IIFE + try/catch + DOM 判空；控件 ≥44×44px 且支持 click/tap；动画可暂停/可重置；JS 失败时保留静态主结构 + 文字说明。
+- 示例数据只出现在模板示例中；真实输出必须填真实数据并写数据口径。
 
-## 1. 状态色板（全闭环统一）
+## 2. 视觉语言（全闭环统一）
 
-| 状态 | 色值 | 用途 |
-|---|---|---|
-| 答对 / 已掌握 | `#2f9e6e` | correct、mastered |
-| 答错 / 未掌握 | `#d64545` | wrong、pending |
-| 未答 | `#9ca3af` | unanswered |
-| 改对 | `#3b82f6` | changedToRight |
-| 改错 / 犹豫 | `#f59e0b` | changedToWrong、hesitation |
-| 中性背景 | `#f5f6f8` / `#fafbfc` / 边框 `#e5e6eb` | 卡片 |
+### 2.1 状态色板
 
-仅用颜色区分时必须加文字/形状/图例。
+| 状态 | 色值 | 图标 | 用途 |
+|---|---|---|---|
+| 答对/已掌握 | `#2f9e6e` | ✓ | correct、mastered |
+| 答错/未掌握 | `#d64545` | ✗ | wrong、pending |
+| 未答 | `#9ca3af` | – | unanswered |
+| 改对 | `#3b82f6` | ↻ | changedToRight |
+| 改错/犹豫 | `#f59e0b` | ⚠ | changedToWrong、hesitation |
+| 断点（错因定位） | `#d64545` 虚线框 + ⚡ | 红色虚线 2px | 轨迹图中标错因环节 |
+| 中性 | `#f5f6f8` 背景 / `#fafbfc` 内卡 / 边框 `#e5e6eb` | | 容器 |
+| 记忆锚点 | `#fff7e6` 底 + `#f59e0b` 边 | 🧠 | 一句话口诀 |
+
+仅用颜色区分时必须加文字/图标/形状。
+
+### 2.2 版式节奏
+
+- **纵向信息图**：顶部标题行（题号+知识点+状态徽章）→ 分区（①②③）→ 图脚（数据口径/来源）。
+- **编号引导**：每个分区用"① 你的轨迹"式的小标签，明确阅读顺序。
+- **间距**：分区间距 12-16px，区内行距 1.7；标题 15-16px 粗，正文 14px，辅助 12px `#8a94a6`。
+- **组件**：节点用圆角 8-10px 容器 + 1px 边框；徽章用圆角胶囊；连线用 `→`/SVG 箭头，标时间戳（如 `91s fill`）。
 
 ---
 
-## V-01 · 关键事实卡（步骤 1 首屏）
+## V-01 · 首诊总览（步骤 1，一图替代四卡）
 
-**用途**：3 个关键事实（得分与已答/未答、最高频模块正确率、行为异常摘要）+ 1 行总览。
-**形态**：指标卡 grid。
+**用途**：得分/已答/模块/行为异常/用时，一屏看完。
+**形态**：纵向信息图（顶部指标行 + 模块正确率迷你条 + 行为异常摘要）。
 
 ```html type="renderer"
 <html style="margin:0;padding:0;">
-<title>BeachSOLO 首诊 · <试卷名></title>
+<title>BeachSOLO 首诊 · 2025-上海-行测</title>
 <div style="width:100%;box-sizing:border-box;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f6f8;padding:16px;color:#1f2329;">
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;">本次首诊 · <试卷名>（attemptId: <前8位>）</div>
-  <div style="display:flex;flex-wrap:wrap;gap:10px;">
-    <div style="flex:1 1 150px;background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:10px 12px;">
-      <div style="font-size:12px;color:#8a94a6;">得分</div>
-      <div style="font-size:18px;font-weight:700;">1.4 / 100</div>
-      <div style="font-size:12px;color:#d64545;">已答 11 / 130</div>
+  <div style="background:#fff;border:1px solid #e5e6eb;border-radius:12px;padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+      <div style="font-size:16px;font-weight:700;">首诊 · 2025-上海-行测</div>
+      <div style="font-size:12px;color:#8a94a6;">attemptId: b1d1d07d</div>
     </div>
-    <div style="flex:1 1 150px;background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:10px 12px;">
-      <div style="font-size:12px;color:#8a94a6;">最高频作答模块</div>
-      <div style="font-size:18px;font-weight:700;">政治理论</div>
-      <div style="font-size:12px;color:#d64545;">正确率 18.2%（2/11）</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:14px;margin-bottom:12px;">
+      <div style="flex:1 1 130px;background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:10px;"><div style="font-size:12px;color:#8a94a6;">得分</div><div style="font-size:20px;font-weight:700;color:#d64545;">1.4<span style="font-size:12px;font-weight:400;color:#8a94a6;"> / 100</span></div><div style="font-size:12px;color:#d64545;">已答 11 / 130</div></div>
+      <div style="flex:1 1 130px;background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:10px;"><div style="font-size:12px;color:#8a94a6;">最高频模块</div><div style="font-size:20px;font-weight:700;">政治理论</div><div style="font-size:12px;color:#d64545;">正确率 18.2%</div></div>
+      <div style="flex:1 1 130px;background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:10px;"><div style="font-size:12px;color:#8a94a6;">整卷用时</div><div style="font-size:20px;font-weight:700;">10 分钟</div><div style="font-size:12px;color:#8a94a6;">暂停 40s</div></div>
+      <div style="flex:1 1 130px;background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:10px;"><div style="font-size:12px;color:#8a94a6;">行为异常</div><div style="font-size:20px;font-weight:700;color:#f59e0b;">4 处</div><div style="font-size:12px;color:#8a94a6;">改错3 · 誊写3 · 超长1</div></div>
     </div>
-    <div style="flex:1 1 150px;background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:10px 12px;">
-      <div style="font-size:12px;color:#8a94a6;">行为异常</div>
-      <div style="font-size:18px;font-weight:700;">4 处</div>
-      <div style="font-size:12px;color:#8a94a6;">改错 3 · 誊写不一致 3 · 超长 1</div>
+    <div style="font-size:13px;font-weight:700;color:#646a73;margin-bottom:6px;">模块正确率（已答）</div>
+    <div style="display:flex;flex-direction:column;gap:5px;font-size:13px;">
+      <div style="display:flex;align-items:center;gap:8px;"><span style="width:110px;flex:none;">政治理论</span><div style="flex:1;background:#e5e6eb;border-radius:4px;height:10px;overflow:hidden;"><div style="width:18%;height:100%;background:#d64545;"></div></div><span style="flex:none;color:#d64545;font-weight:700;">18.2%</span></div>
+      <div style="display:flex;align-items:center;gap:8px;"><span style="width:110px;flex:none;">其余 5 模块</span><div style="flex:1;background:#e5e6eb;border-radius:4px;height:10px;overflow:hidden;"><div style="width:0%;height:100%;background:#9ca3af;"></div></div><span style="flex:none;color:#9ca3af;">未作答</span></div>
     </div>
-    <div style="flex:1 1 150px;background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:10px 12px;">
-      <div style="font-size:12px;color:#8a94a6;">整卷用时</div>
-      <div style="font-size:18px;font-weight:700;">10 分钟</div>
-      <div style="font-size:12px;color:#d64545;">119 题未答</div>
-    </div>
+    <div style="margin-top:10px;padding:8px 10px;background:#fef2f2;border:1px solid #d64545;border-radius:8px;font-size:13px;color:#b03a3a;">关键事实：本次仅作答前 11 题即交卷（<b>119 题未答</b>），全部集中在政治理论；3 题改答后错且草稿与终答不一致。</div>
   </div>
-  <div style="margin-top:8px;font-size:12px;color:#8a94a6;">数据口径：snapshot.meta（score/correctCount/unansweredCount/durationSeconds）与 snapshot.questions 统计。</div>
+  <div style="margin-top:8px;font-size:12px;color:#8a94a6;">数据口径：snapshot.meta + snapshot.questions 统计；异常条目标注见下文 V-03。</div>
 </div>
 </html>
 ```
 
-**真实输出**：把 `<试卷名>`、数字换成数据包实际值；未答/得分等关键异常用 `#d64545` 标注。
-
-## V-02 · 模块正确率条形图（步骤 1）
-
-**用途**：一眼看到哪些模块弱、哪些没做。
-**形态**：ECharts bar（按已答正确率降序；未作答模块单独一行标注"未作答"）。
-
-```js
-{
-  tooltip: { trigger: 'axis', formatter: p => p[0].name + '：' + p[0].value + '%（' + (p[0].data.total || '') + ' 题）' },
-  grid: { left: 100, right: 40, top: 10, bottom: 30 },
-  xAxis: { type: 'value', max: 100, axisLabel: { formatter: '{value}%' } },
-  yAxis: { type: 'category', data: ['政治理论', '常识判断', '言语理解与表达', '判断推理', '数量关系', '资料分析'] },
-  series: [{ type: 'bar', barMaxWidth: 22, label: { show: true, position: 'right', formatter: '{c}%' },
-    data: [
-      { value: 18.2, total: '已答11' },
-      { value: 0, total: '未作答' },
-      { value: 0, total: '未作答' },
-      { value: 0, total: '未作答' },
-      { value: 0, total: '未作答' },
-      { value: 0, total: '未作答' }
-    ],
-    itemStyle: { color: p => p.value > 0 ? (p.value >= 60 ? '#2f9e6e' : '#d64545') : '#9ca3af' } }]
-}
-```
-
-**真实输出**：按数据包各模块已答正确率填充；未作答模块 value=0 并灰显、标注"未作答"；口径为"已答题目中的正确率"。
+**真实输出**：数字换成数据包实际值；未答模块灰显；关键事实行只写最反常的 1-2 条。
 
 ## V-03 · 异常信号清单（步骤 1）
 
-**用途**：列出每题异常 + 数据依据字段。
-**形态**：Markdown 表格（标题、状态色字）+ 每条附依据（如 `draftMatchesFinal=false`）。示例：
+**用途**：逐题异常 + 数据依据字段。
+**形态**：Markdown 表格（比图更利于逐行核对），状态字色 + 依据字段。示例：
 
-| 题号 | 模块 | 状态 | 用时 | 命中信号（数据依据） |
-|---|---|---|---|---|
-| 1 | 政治理论 | 改错 | 31s | 草稿与终答不一致 `draftMatchesFinal=false`；改答 2 次 `changeCount=2` |
-| 11 | 政治理论 | 答错 | 451s | 用时远超模块均值；事件流含 pause(542s)→resume(582s) |
+| 题号 | 状态 | 用时 | 命中信号（数据依据） |
+|---|---|---|---|
+| 1 | 改错 | 31s | 草稿与终答不一致 `draftMatchesFinal=false`；改答 2 次 `changeCount=2` |
+| 11 | 答错 | 451s | 用时远超模块均值；事件流 pause(542s)→resume(582s) |
 
-**真实输出**：只列命中信号的行；依据引用 `snapshot.questions` / `behaviorEventsRaw` 字段名，不编造。
+## V-04 · 作答过程回放（步骤 1/2，交互增强版）
 
-## V-04 · 作答过程时间线（步骤 1/2）
-
-**用途**：还原"先做什么、卡在哪、何时交卷"，支撑行为模式带教。
-**形态**：ECharts scatter（事件类型分 y 轴）+ markArea 暂停区。可直接复用 `scripts/generate-report.mjs` 生成的 `c-events` 图数据；对话内输出精简版（只保留关键事件：首答、改答、pause、submit）。
+**用途**：像回放录像一样看用户"先做什么、卡在哪、何时交卷"。
+**形态**：ECharts scatter + markArea；**增强**：tooltip 显示事件详情 + 点击节点可高亮对应题（JS 增强，失败则静态 scatter 仍完整）。模板直接复用 `scripts/generate-report.mjs` 的 `c-events` 数据源，对话内输出精简版（首答/改答/暂停/交卷）。
 
 ```js
 {
-  tooltip: { formatter: p => { const e = p.data[2]; return (e.type || '') + (e.questionId ? ' · 第' + e.no + '题' : '') + (e.value ? ' · ' + e.value : '') + ' @ ' + e.x + 's'; } },
+  tooltip: { formatter: p => { const e = p.data[2]; return (e.type||'') + (e.questionId ? ' · 第' + e.no + '题' : '') + (e.value ? ' · ' + e.value : '') + ' @ ' + e.x + 's'; } },
   grid: { left: 80, right: 20, top: 20, bottom: 30 },
   xAxis: { type: 'value', name: '秒' },
   yAxis: { type: 'category', data: ['draft', 'changeDraft', 'answer', 'pause', 'submit'] },
@@ -122,129 +115,114 @@
 }
 ```
 
-**真实输出**：事件从 `behaviorEventsRaw` 提取，questionId 映射为题号；暂停区用 markArea 标红。
-
 ## V-05 · 誊写失误路径图（步骤 2/3）
 
-**用途**：把"草稿→涂卡→结果"画成路径，标出断点（草稿对、涂卡错）。
-**形态**：HTML/SVG 三节点横向流。
+**用途**：把"草稿→涂卡→结果"画成路径，标出断点。
+**形态**：HTML/SVG 横向流（节点带时间戳），断点红色虚线框。
 
-```html type="renderer"
+```html type="renderer">
 <html style="margin:0;padding:0;">
 <title>第1题 · 作答路径还原</title>
 <div style="width:100%;box-sizing:border-box;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f6f8;padding:16px;color:#1f2329;">
-  <div style="font-size:15px;font-weight:700;margin-bottom:12px;">第1题 · 作答路径还原（事件流依据）</div>
-  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;">
-    <div style="background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:8px 12px;">草稿 <b>B</b><div style="color:#8a94a6;font-size:12px;">17s draft</div></div>
-    <div style="color:#9ca3af;">→</div>
-    <div style="background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:8px 12px;">改草稿 <b style="color:#2f9e6e;">A ✓</b><div style="color:#8a94a6;font-size:12px;">85s changeDraft（已改对）</div></div>
-    <div style="color:#9ca3af;">→</div>
-    <div style="background:#fef2f2;border:2px solid #d64545;border-radius:8px;padding:8px 12px;">涂卡 <b style="color:#d64545;">B ✗</b><div style="color:#8a94a6;font-size:12px;">90s answer/fill（誊写失误）</div></div>
-    <div style="color:#9ca3af;">→</div>
-    <div style="background:#f0f7f4;border:1px solid #2f9e6e;border-radius:8px;padding:8px 12px;">正确 <b style="color:#2f9e6e;">A</b></div>
-  </div>
-  <div style="margin-top:8px;font-size:12px;color:#d64545;">断点：卷面已改到正确项 A，答题卡填了 B（draftMatchesFinal=false）→ 归因：誊写/流程失误。</div>
-</div>
-</html>
-```
-
-**真实输出**：节点与时间戳取自 `behaviorEventsRaw`（draft/changeDraft/answer/fill），正确项用绿、失误用红。
-
-## V-06 · 知识点卡（步骤 3.1）
-
-**用途**：每题开讲前给知识点定位 + 历史命中。
-**形态**：HTML 信息卡。
-
-```html type="renderer"
-<html style="margin:0;padding:0;">
-<title>第2题 · 知识点卡</title>
-<div style="width:100%;box-sizing:border-box;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f6f8;padding:16px;color:#1f2329;">
-  <div style="background:#fff;border:1px solid #e5e6eb;border-radius:10px;padding:14px;">
-    <div style="font-size:15px;font-weight:700;margin-bottom:8px;">第2题 · 考察知识点</div>
-    <div style="font-size:14px;line-height:1.7;">
-      <b>全面从严治党·作风建设</b>——党建各领域地位辨析（政治建设摆在首位）+ 组合式判断<br>
-      板块：政治理论 / 党史党建
+  <div style="background:#fff;border:1px solid #e5e6eb;border-radius:12px;padding:16px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">第1题 · 作答路径还原 <span style="font-size:12px;font-weight:400;color:#8a94a6;">（behaviorEventsRaw 依据）</span></div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;">
+      <div style="background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:8px 12px;">草稿 <b>B</b><div style="color:#8a94a6;font-size:12px;">17s draft</div></div>
+      <div style="color:#9ca3af;">→</div>
+      <div style="background:#f0f7f4;border:1px solid #2f9e6e;border-radius:8px;padding:8px 12px;">改草稿 <b style="color:#2f9e6e;">A ✓</b><div style="color:#8a94a6;font-size:12px;">85s changeDraft</div></div>
+      <div style="color:#9ca3af;">→</div>
+      <div style="background:#fef2f2;border:2px dashed #d64545;border-radius:8px;padding:8px 12px;">涂卡 <b style="color:#d64545;">B ✗</b> ⚡<div style="color:#8a94a6;font-size:12px;">90s answer/fill</div></div>
+      <div style="color:#9ca3af;">→</div>
+      <div style="background:#f0f7f4;border:1px solid #2f9e6e;border-radius:8px;padding:8px 12px;">正确 <b style="color:#2f9e6e;">A</b></div>
     </div>
-    <div style="margin-top:10px;padding:8px 10px;background:#fff7e6;border:1px solid #f59e0b;border-radius:8px;font-size:13px;color:#8a5a00;">⚠ 历史命中：knowledge/政治理论/q002-870a483b.md 曾收录同知识点错题（2026-10-21）</div>
+    <div style="margin-top:10px;font-size:13px;color:#d64545;">⚡ 断点：卷面已改到正确项 A，答题卡填了 B（draftMatchesFinal=false）→ 归因候选：誊写/流程失误。</div>
   </div>
 </div>
 </html>
 ```
 
-**真实输出**：知识点判定后回写知识库 `考察知识点:` 行；历史命中用 Grep 检索 knowledge/ 后如实列出，无历史则不显示 ⚠ 行。
+## V-07 · 错因路径图（第一幕·还原，请用户自述前出示）
 
-## V-07 · 错因路径图（步骤 3.2，先给用户看，再请自述）
+**用途**：可视化作答链（首答→改答→终答 vs 正确项），**断点先留白不揭**，引导用户自述。
+**形态**：纵向信息图。作答链横向、时间戳在下；断点区显示"⚡ 待定位"（虚线框+问号），不写结论。
 
-**用途**：可视化作答链（首答→改答→终答 vs 正确项），标断点，引导用户自述"当时为什么这么选"。
-**形态**：HTML/SVG 作答链 + 断点标签。
-
-```html type="renderer"
+```html type="renderer">
 <html style="margin:0;padding:0;">
-<title>第2题 · 错因路径图</title>
+<title>第2题 · 第一幕：你的作答轨迹</title>
 <div style="width:100%;box-sizing:border-box;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f6f8;padding:16px;color:#1f2329;">
-  <div style="font-size:15px;font-weight:700;margin-bottom:12px;">第2题 · 你的作答链（行为证据）</div>
-  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;">
-    <div style="background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:8px 12px;">首答 C（②③）<div style="color:#8a94a6;font-size:12px;">91s fill</div></div>
-    <div style="color:#9ca3af;">→</div>
-    <div style="background:#fff7e6;border:1px solid #f59e0b;border-radius:8px;padding:8px 12px;">改答 A（①②）<div style="color:#8a94a6;font-size:12px;">108s changeAnswer</div></div>
-    <div style="color:#9ca3af;">→</div>
-    <div style="background:#fef2f2;border:2px solid #d64545;border-radius:8px;padding:8px 12px;">终答 <b style="color:#d64545;">A ✗</b><div style="color:#8a94a6;font-size:12px;">两次都保留②</div></div>
-    <div style="color:#9ca3af;">→</div>
-    <div style="background:#f0f7f4;border:1px solid #2f9e6e;border-radius:8px;padding:8px 12px;">正确 <b style="color:#2f9e6e;">D（①④）</b></div>
+  <div style="background:#fff;border:1px solid #e5e6eb;border-radius:12px;padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+      <div style="font-size:16px;font-weight:700;">第2题 · 你的作答轨迹</div>
+      <span style="background:#fef2f2;color:#d64545;border:1px solid #d64545;border-radius:12px;padding:2px 10px;font-size:12px;">改答后错</span>
+    </div>
+    <div style="font-size:13px;color:#646a73;margin-bottom:12px;">纠治形式主义主要彰显了中国共产党：①作风建设… ②思想建设在首位… ③基层组织建设… ④求真务实走好赶考之路</div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;">
+      <div style="background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:8px 12px;">首答 C（②③）<div style="color:#8a94a6;font-size:12px;">91s fill</div></div>
+      <div style="color:#9ca3af;">→</div>
+      <div style="background:#fff7e6;border:1px solid #f59e0b;border-radius:8px;padding:8px 12px;">改答 A（①②）<div style="color:#8a94a6;font-size:12px;">108s changeAnswer</div></div>
+      <div style="color:#9ca3af;">→</div>
+      <div style="background:#fef2f2;border:2px solid #d64545;border-radius:8px;padding:8px 12px;">终答 <b style="color:#d64545;">A ✗</b></div>
+      <div style="color:#9ca3af;">→</div>
+      <div style="background:#f0f7f4;border:1px solid #2f9e6e;border-radius:8px;padding:8px 12px;">正确 <b style="color:#2f9e6e;">D（①④）</b></div>
+    </div>
+    <div style="margin-top:12px;padding:10px 12px;background:#fafbfc;border:2px dashed #e5e6eb;border-radius:8px;font-size:14px;color:#8a94a6;">⚡ <b>断点待定位</b>：两次作答都保留了 ②，错因可能藏在这里。你当时为什么坚持②？卡在哪一步？（先自述，我再揭）</div>
   </div>
-  <div style="margin-top:8px;font-size:13px;color:#8a94a6;">断点指向：对②"思想建设放在首要位置"的判断。你当时为什么坚持②？卡在哪一步？（请先自述，我再补证据）</div>
+  <div style="margin-top:8px;font-size:12px;color:#8a94a6;">数据依据：behaviorEventsRaw（fill/changeAnswer）与 answersRaw（firstAnswer/finalAnswer）。</div>
 </div>
 </html>
 ```
 
-**真实输出**：节点取自 `behaviorEventsRaw`/`answersRaw`；断点标签是"待确认假设"而非结论，请用户先自述。
+**真实输出**：题干压缩为要点行（不贴全文）；断点区只给"指向"不给结论；用户自述后才进 V-08 揭晓。
 
-## V-08 · 推理链对比图 + 记忆锚点卡（步骤 3.3）
+## V-08 · 揭秘：断点定位 + 推理链对比 + 记忆锚点（第二幕）
 
-**用途**：讲清①正确推理链 ②你的错误路径错在哪个环节；配一句话记忆锚点。
-**形态**：HTML 左右对比 + 锚点卡。
+**用途**：用户自述后，一张图讲完"断点在哪、为什么对、为什么错、怎么记"。
+**形态**：纵向信息图三段式：①⚡断点定位 ②正确链 vs 错误路径（左右对比） ③🧠锚点卡。
 
-```html type="renderer"
+```html type="renderer">
 <html style="margin:0;padding:0;">
-<title>第2题 · 推理链对比</title>
+<title>第2题 · 第二幕：揭秘</title>
 <div style="width:100%;box-sizing:border-box;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f6f8;padding:16px;color:#1f2329;">
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;">第2题 · 为什么 D 对、A 错</div>
-  <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:14px;">
-    <div style="flex:1 1 300px;background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:12px;">
-      <div style="font-weight:700;color:#2f9e6e;margin-bottom:6px;">✓ 正确推理链</div>
-      <div style="line-height:1.8;">纠治形式主义 → 属<b>作风建设</b> → 作风是全面从严治党的突破口 → ①对<br>纠治形式主义 → 需<b>求真务实</b> → 呼应新时代"赶考"之路 → ④对<br>②"思想建设在首位"<b>错</b>（政治建设才在首位）→ 排除含②选项</div>
+  <div style="background:#fff;border:1px solid #e5e6eb;border-radius:12px;padding:16px;">
+    <div style="font-size:16px;font-weight:700;margin-bottom:12px;">第2题 · 揭秘 <span style="font-size:12px;font-weight:400;color:#8a94a6;">为什么 D 对、A 错</span></div>
+    <div style="padding:10px 12px;background:#fef2f2;border:2px dashed #d64545;border-radius:8px;font-size:14px;margin-bottom:12px;">① ⚡ <b>断点定位</b>：②"思想建设放在首位"——政治建设/思想建设<b>地位混淆</b>（你的核心盲区）；同时漏看④"求真务实↔纠治形式主义"的呼应。</div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:14px;margin-bottom:12px;">
+      <div style="flex:1 1 290px;background:#f0f7f4;border:1px solid #2f9e6e;border-radius:8px;padding:12px;">
+        <div style="font-weight:700;color:#2f9e6e;margin-bottom:6px;">✓ 正确推理链</div>
+        <div style="line-height:1.8;">纠治形式主义 → 属<b>作风建设</b> → 全面从严治党突破口 → ①对<br>纠治形式主义 → 需<b>求真务实</b> → 呼应"赶考" → ④对<br>②错（政治建设才在首位）→ 排除含②项 → 锁定 D</div>
+      </div>
+      <div style="flex:1 1 290px;background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:12px;">
+        <div style="font-weight:700;color:#d64545;margin-bottom:6px;">✗ 你的错误路径</div>
+        <div style="line-height:1.8;">保留② → <b>地位混淆</b>（断点）<br>漏④ → 未识别呼应<br>速解：含②的 A/B/C 全排除</div>
+      </div>
     </div>
-    <div style="flex:1 1 300px;background:#fff;border:1px solid #e5e6eb;border-radius:8px;padding:12px;">
-      <div style="font-weight:700;color:#d64545;margin-bottom:6px;">✗ 你的错误路径</div>
-      <div style="line-height:1.8;">选②（思想建设在首位）→ <b style="color:#d64545;">断点：政治建设/思想建设地位混淆</b><br>漏④ → 未识别"求真务实↔纠治形式主义"呼应<br>速解：含②的选项 A/B/C 全排除 → 直接锁定 D</div>
-    </div>
+    <div style="padding:10px 12px;background:#fff7e6;border:1px solid #f59e0b;border-radius:8px;font-size:14px;">🧠 <b>记忆锚点</b>：政治建设 = <b>根本性</b>、摆<b>首位</b>；思想建设 = <b>基础性</b>。</div>
   </div>
-  <div style="margin-top:10px;background:#fff7e6;border:1px solid #f59e0b;border-radius:8px;padding:10px 12px;font-size:14px;">
-    🧠 <b>记忆锚点</b>：政治建设 = <b>根本性</b>建设、摆<b>首位</b>；思想建设 = <b>基础性</b>建设。
-  </div>
+  <div style="margin-top:8px;font-size:12px;color:#8a94a6;">依据：数据包官方解析（《全面从严治党开创管党治党新时代》/2020陕西考察讲话）。</div>
 </div>
 </html>
 ```
 
-**真实输出**：正确链与错误路径按数据包解析 + 确认错因填充；锚点用一句话口诀/固定搭配，必须可复述。
+## V-09 · 小测 / 变式题卡（第三幕·检验）
 
-## V-09 · 小测 / 变式题卡（步骤 3.4 / 3.5 / 4）
+**用途**：即时小测与变式题呈现，便于快速作答判分。
+**形态**：HTML 题干卡 + 选项（A-D 分行）+ 来源标注（真题/改编/原创，必须可见）。
 
-**用途**：即时小测与变式题的题目呈现，便于快速作答与判分。
-**形态**：HTML 题干卡（选项 A-D）；来源标注必须可见（真题/改编/原创）。
-
-```html type="renderer"
+```html type="renderer">
 <html style="margin:0;padding:0;">
 <title>变式题 2 · 检测卡</title>
 <div style="width:100%;box-sizing:border-box;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f6f8;padding:16px;color:#1f2329;">
-  <div style="background:#fff;border:1px solid #e5e6eb;border-radius:10px;padding:14px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px;">
+  <div style="background:#fff;border:1px solid #e5e6eb;border-radius:12px;padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
       <div style="font-size:15px;font-weight:700;">变式题 2 · 党的建设布局</div>
-      <div style="font-size:12px;color:#8a94a6;">来源：改编（十九大报告权威论断）</div>
+      <div style="font-size:12px;color:#8a94a6;">来源：改编（十九大报告论断）</div>
     </div>
     <div style="font-size:14px;line-height:1.7;margin-bottom:10px;">下列关于新时代党的建设布局的说法，正确的是：</div>
     <div style="font-size:14px;line-height:1.9;">
-      A. 党的思想建设是根本性建设<br>B. 党的政治建设摆在首位，是根本性建设<br>C. 党的组织建设是基础性建设<br>D. 党的作风建设摆在首位
+      <div style="padding:6px 10px;border-radius:8px;">A. 思想建设是根本性建设</div>
+      <div style="padding:6px 10px;border-radius:8px;">B. 政治建设摆在首位，是根本性建设</div>
+      <div style="padding:6px 10px;border-radius:8px;">C. 组织建设是基础性建设</div>
+      <div style="padding:6px 10px;border-radius:8px;">D. 作风建设摆在首位</div>
     </div>
     <div style="margin-top:10px;font-size:12px;color:#8a94a6;">直接回复答案字母即可。</div>
   </div>
@@ -252,23 +230,21 @@
 </html>
 ```
 
-**真实输出**：题干/选项来自 variants 题库或现场命题；来源标注（真题=注明出处；改编=注明依据；原创=注明原创）不得省略。
+## V-10 · 判定 / 进度 / 处方卡（步骤 4/5/7）
 
-## V-10 · 判定 / 进度 / 处方卡（步骤 4 / 5 / 7）
+**用途**：掌握判定徽章、带教进度条、处方卡、3 日巩固计划。
+**形态**：HTML 徽章 + 进度条 + 处方卡（判定与处方可同图）。
 
-**用途**：掌握判定徽章、整卷带教进度条、处方卡、3 日巩固计划。
-**形态**：HTML 徽章 + 进度条 + 卡片。
-
-```html type="renderer"
+```html type="renderer">
 <html style="margin:0;padding:0;">
 <title>带教进度与判定</title>
 <div style="width:100%;box-sizing:border-box;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f6f8;padding:16px;color:#1f2329;">
-  <div style="background:#fff;border:1px solid #e5e6eb;border-radius:10px;padding:14px;">
+  <div style="background:#fff;border:1px solid #e5e6eb;border-radius:12px;padding:16px;">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;">带教进度 · 组A 3/3</div>
     <div style="background:#e5e6eb;border-radius:6px;height:10px;overflow:hidden;margin-bottom:10px;"><div style="width:100%;height:100%;background:#2f9e6e;"></div></div>
     <div style="font-size:14px;line-height:2;">
-      <span style="display:inline-block;background:#f0f7f4;color:#2f9e6e;border:1px solid #2f9e6e;border-radius:12px;padding:2px 10px;margin-right:6px;">已掌握</span>科学体系板块定位 · 立法工作格局<br>
-      <span style="display:inline-block;background:#fef2f2;color:#d64545;border:1px solid #d64545;border-radius:12px;padding:2px 10px;margin-right:6px;">待复查</span>政治建设摆在首位（补救后再测仍错）
+      <span style="display:inline-block;background:#f0f7f4;color:#2f9e6e;border:1px solid #2f9e6e;border-radius:12px;padding:2px 10px;margin-right:6px;">✓ 已掌握</span>科学体系板块定位 · 立法工作格局<br>
+      <span style="display:inline-block;background:#fef2f2;color:#d64545;border:1px solid #d64545;border-radius:12px;padding:2px 10px;margin-right:6px;">⚡ 待复查</span>政治建设摆在首位（补救后再测仍错）
     </div>
     <div style="margin-top:12px;padding:10px 12px;background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;font-size:14px;">
       <b>处方 · 政治常识专项</b>（触发：政治模块错 9 题 ≥2，变式未掌握）<br>
@@ -280,26 +256,21 @@
 </html>
 ```
 
-**真实输出**：进度百分比 = 已带教题数/带教目标数；徽章状态与 profile 一致；处方按 resources.md 触发规则 + 数据包证据。
-
 ---
 
-## 2. 使用顺序总览（一轮完整带教的 renderer 编排）
+## 3. 三幕带教节奏（每题的对话编排）
 
-| 环节 | 模板 | 说明 |
-|---|---|---|
-| 首诊 | V-01 + V-02 + V-03（+ V-04 可选） | 一屏内呈现，不分多次 |
-| 行为模式带教 | V-04 + V-05（如有誊写失误） | 最多 2 轮对话 |
-| 逐题·知识点 | V-06 | 每题一次 |
-| 逐题·错因确认 | V-07 → 用户自述 → 补证据 | 先图后问 |
-| 逐题·讲解 | V-08 | 含记忆锚点 |
-| 逐题·小测 | V-09 | 1 题，答错回 V-08 |
-| 变式实测 | V-09 ×2-3 | 判分用 Markdown 表 |
-| 补救闭环 | V-08（换角度）+ V-09 | 未过才触发 |
-| 判定/处方 | V-10 | 每题判定 + 整卷终版 |
+| 幕 | 教练动作 | 可视化 | 用户动作 |
+|---|---|---|---|
+| 第一幕·还原 | 出示轨迹图，只给证据 | V-07（断点留白） | 自述错因 |
+| 第二幕·揭秘 | 用户自述后揭断点+讲解 | V-08（三段式） | 提疑/确认 |
+| 第三幕·检验 | 小测 → 变式 → 判分 → 补救 | V-09 → 判分表 → V-10 | 作答 |
 
-## 3. 降级规则
+**节奏纪律**：第一幕图先出、结论后给；用户没自述前不揭断点；一轮对话只推进一幕。
 
-- 渲染器不可用/失败 → 用结构化 Markdown（表格/列表）表达同等信息，不得留空白。
+## 4. 降级规则
+
+- 渲染器不可用/失败 → 用结构化 Markdown（表格/列表/引用）表达同等信息，不得留空白。
+- 交互脚本失败 → 保留静态主结构 + 文字说明。
 - 数据缺失（字段 null）→ 如实标注"该信号未采集"，图内该节点置灰。
-- 交互模板失败 → 用对应静态模板。
+- 长题干 → 压缩为要点行（如"①作风建设…②思想建设在首位…"），全文放知识库。
