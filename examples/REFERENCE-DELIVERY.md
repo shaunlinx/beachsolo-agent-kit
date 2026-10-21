@@ -22,10 +22,15 @@
   规范要求归档 media/）
 - 第 10 题（memory）→ 中国政府网《法治中国建设规划》原文 + 人大 70 周年讲话
 
-**云文档（步骤 3 主交付）**：
-- URL：https://scnxn527ul86.feishu.cn/docx/EsL1d5CNFobykSxzwxkcoQNunke
-- 结构：摘要 callout → 8 章（诊断/行为/错因/逐题/进度/处方/更新日志/来源）
-- 4 个 HTML block：overview / timeline / reasons / progress（即 templates/widget-*.html 的来源）
+**云文档（步骤 3 主交付，v2 形态）**：
+- 知识库空间：BeachSOLO 复盘（space_id 7699172946908040454）
+- 知识库节点 URL：https://scnxn527ul86.feishu.cn/wiki/FYcJwf83nit9OSk1D3ecibMin0c
+- 结构：摘要 callout → 一图看懂（widget-overview）→ 怎么答的（timeline+行为点）→
+  错在哪（reasons+错题表）→ 逐题带教（bookmark 资源卡片内嵌 + 概念对照图 + checkbox
+  小测/变式）→ 掌握与巩固计划（progress + checkbox 待办）→ 练习资源（bookmark 卡片）→ 更新日志
+- 5 个 HTML block：overview / timeline / reasons / progress / concept（即 templates/widget-*.html）
+- 资源内嵌预览：bookmark 卡片 ×8（人民网/求是网/抖音 ×2/政府网 ×2/工具箱 ×2），
+  checkbox 待办 ×9（小测/变式/巩固计划 D1-D3）
 
 **变式判定（步骤 4）**：科学体系定位 ✓ 掌握 · 立法格局 ✓ 掌握 ·
 政治建设摆在首位 ✗ 待复查（pendingPoint，进入巩固计划）
@@ -39,6 +44,7 @@ DELIVERY-LOG.md 追加；巩固计划 plans/remediation-2026-10-21.md（D1 背�
 2. 统计归因（错因分布 + 行为画像）→ 写成结论 JSON；
 3. 媒介路由 + 并行采集（检索 + 生成，生成物立即归档 media/）；
 4. 套 templates/cloud-doc.xml 与 widget-*.html → 创建云文档 → 回读验证；
-5. 变式实测（文档内嵌）→ 判定掌握/待复查 → 补救闭环；
-6. 更新 knowledge/ + profile.json + DELIVERY-LOG.md + 云文档更新日志；
-7. 处方 → 交付云文档 URL + 富媒体产物。
+5. 变式实测（文档内嵌 checkbox）→ 判定掌握/待复查 → 补救闭环；
+6. `wiki +move` 把文档挂入"BeachSOLO 复盘"知识空间，交付节点 URL；
+7. 更新 knowledge/ + profile.json + DELIVERY-LOG.md + 云文档更新日志；
+8. 处方 → 交付知识库节点 URL + 富媒体产物。

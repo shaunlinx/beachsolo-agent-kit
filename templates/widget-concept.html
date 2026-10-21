@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="use-iframe" content="true">
+<meta name="html-box-height-mode" content="auto">
+<meta name="description" content="概念对照图解：两个易混概念的地位/属性左右对照，标注易混点与记忆锚点">
+<title></title>
+</head>
+<body style="margin:0;background:#FFFFFF;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+<div style="width:100%;max-width:100%;box-sizing:border-box;padding:4px 2px;color:#1F2329;">
+  <div style="font-size:16px;font-weight:700;color:#1A2B4A;margin-bottom:10px;">{{CONCEPT_TITLE}}：一图分清两个概念</div>
+  <div style="display:flex;gap:10px;margin-bottom:12px;">
+    <div style="flex:1;background:#F7F9FC;border:1px solid #DEE3E8;border-top:3px solid #1A2B4A;border-radius:8px;padding:12px;">
+      <div style="font-size:14px;font-weight:700;color:#1A2B4A;margin-bottom:6px;">{{CONCEPT_A_NAME}}</div>
+      {{CONCEPT_A_ATTRS}}<div style="font-size:13px;color:#1F2329;line-height:1.8;">· 地位：{{A_POSITION}}<br>· 作用：{{A_ROLE}}<br>· 考点：{{A_TESTPOINT}}</div>
+    </div>
+    <div style="flex:1;background:#F7F9FC;border:1px solid #DEE3E8;border-top:3px solid #758092;border-radius:8px;padding:12px;">
+      <div style="font-size:14px;font-weight:700;color:#1A2B4A;margin-bottom:6px;">{{CONCEPT_B_NAME}}</div>
+      <div style="font-size:13px;color:#1F2329;line-height:1.8;">· 地位：{{B_POSITION}}<br>· 作用：{{B_ROLE}}<br>· 考点：{{B_TESTPOINT}}</div>
+    </div>
+  </div>
+  <div style="padding:8px 12px;background:#FBEFEF;border:1px solid #E8B4B4;border-radius:8px;font-size:13px;color:#922B21;margin-bottom:10px;">
+    <b>易混点：</b>{{CONFUSION_POINT}}（本题即栽在这里）
+  </div>
+  <div style="padding:8px 12px;background:#EAF3EF;border:1px solid #7FBFA3;border-radius:8px;font-size:13px;color:#1E6B46;">
+    <b>记忆锚点：</b>{{MNEMONIC}}
+  </div>
+</div>
+</body>
+</html>

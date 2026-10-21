@@ -1,69 +1,54 @@
-<title>BeachSOLO 带教档案 · {{PAPER_TITLE}}（{{DIAGNOSIS_INDEX}}）</title>
+<title>BeachSOLO 复盘 · {{PAPER_TITLE}}</title>
 
 <callout background-color="light-gray" border-color="gray">
-<p><b>本次带教回答的核心问题：</b>{{SUMMARY_QUESTION}}</p>
+<p><b>核心：</b>{{SUMMARY_ONE_LINE}}</p>
 <ol>
-<li><b>结论一：</b>{{SUMMARY_P1}}</li>
-<li><b>结论二：</b>{{SUMMARY_P2}}</li>
-<li><b>建议：</b>{{SUMMARY_P3}}</li>
+<li>{{S1}}</li>
+<li>{{S2}}</li>
+<li>{{S3}}</li>
 </ol>
 </callout>
 
-<h1 seq="auto">本次诊断结论：{{DIAGNOSIS_TAKEAWAY}}</h1>
-<p>{{DIAGNOSIS_INTRO}}（数据包 attemptId {{ATTEMPT_ID_SHORT}}，{{PAPER_META}}）</p>
+<h1 seq="auto">一图看懂本次复盘</h1>
 <html5-block path="@./templates/widget-overview.html"/>
-<p>{{OVERVIEW_EXPLAIN}}</p>
+<p>{{OVERVIEW_NOTE}}</p>
 
-<h1 seq="auto">作答行为画像：{{BEHAVIOR_TAKEAWAY}}</h1>
-<p>{{BEHAVIOR_INTRO}}</p>
+<h1 seq="auto">怎么答的：{{BEHAVIOR_TAKEAWAY}}</h1>
 <html5-block path="@./templates/widget-timeline.html"/>
-<p>{{BEHAVIOR_EXPLAIN}}</p>
+<ul>
+<li>{{B1}}</li>
+<li>{{B2}}</li>
+<li>{{B3}}</li>
+</ul>
 
-<h1 seq="auto">错因模式统计：{{REASON_TAKEAWAY}}</h1>
-<p>{{REASON_INTRO}}</p>
+<h1 seq="auto">错在哪：{{REASON_TAKEAWAY}}</h1>
 <html5-block path="@./templates/widget-reasons.html"/>
-<p>{{REASON_EXPLAIN}}</p>
 <table>
-<colgroup><col width="70px"/><col width="240px"/><col width="250px"/><col width="260px"/></colgroup>
-<thead><tr><th><p>错题</p></th><th><p>初步归类</p></th><th><p>判断依据（选项差异）</p></th><th><p>状态</p></th></tr></thead>
+<colgroup><col width="80px"/><col width="160px"/><col width="240px"/><col width="180px"/></colgroup>
+<thead><tr><th><p>题</p></th><th><p>错因</p></th><th><p>依据（选项差异）</p></th><th><p>状态</p></th></tr></thead>
 <tbody>
 {{MISTAKE_TABLE_ROWS}}
 </tbody>
 </table>
 <p>{{REASON_NOTE}}</p>
 
-<h1 seq="auto">逐题带教档案（{{COACHED_GROUP}}）</h1>
+<h1 seq="auto">逐题带教</h1>
 {{QUESTION_SECTIONS}}
 
-<h1 seq="auto">掌握与待复查：{{PROGRESS_TAKEAWAY}}</h1>
+<h1 seq="auto">掌握情况与巩固计划</h1>
 <html5-block path="@./templates/widget-progress.html"/>
-<p>{{PROGRESS_EXPLAIN}}</p>
-<table>
-<colgroup><col width="60px"/><col width="120px"/><col width="180px"/><col width="200px"/><col width="260px"/></colgroup>
-<thead><tr><th><p>天</p></th><th><p>动作</p></th><th><p>内容</p></th><th><p>检验方式</p></th><th><p>通过标准</p></th></tr></thead>
-<tbody>
-{{PLAN_ROWS}}
-</tbody>
-</table>
-<p>{{PLAN_NOTE}}</p>
+<p>{{PROGRESS_NOTE}}</p>
+{{PLAN_CHECKBOXES}}
 
-<h1 seq="auto">资源处方：按错因路由的练习入口</h1>
-<ul>
-{{PRESCRIPTION_ITEMS}}
-</ul>
+<h1 seq="auto">练习资源</h1>
+{{PRESCRIPTION_CARDS}}
 <p>{{PRESCRIPTION_NOTE}}</p>
 
-<h1 seq="auto">更新日志（长期维护）</h1>
+<h1 seq="auto">更新日志</h1>
 <table>
-<colgroup><col width="130px"/><col width="330px"/><col width="360px"/></colgroup>
-<thead><tr><th><p>日期</p></th><th><p>带教内容</p></th><th><p>判定 / 变更</p></th></tr></thead>
+<colgroup><col width="120px"/><col width="360px"/><col width="340px"/></colgroup>
+<thead><tr><th><p>日期</p></th><th><p>内容</p></th><th><p>判定 / 变更</p></th></tr></thead>
 <tbody>
 {{LOG_ROWS}}
 </tbody>
 </table>
-<p>{{LOG_NOTE}}</p>
-
-<h1 seq="auto">参考来源</h1>
-<ol>
-{{REFERENCE_ITEMS}}
-</ol>

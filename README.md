@@ -69,8 +69,11 @@ beachsolo-agent-kit/
    + 行为统计（改答率/誊写不一致/用时分布）→ 错因模式画像；
 3. **步骤 2 媒介路由与采集（并行）**：按错因路由（concept→生图 / memory→音频+原文 /
    reasoning→PPT / time→视频检索），生成物立即归档 `media/`；
-4. **步骤 3 云文档成稿**：套 `templates/cloud-doc.xml` + 4 个 HTML block 图集 →
-   创建飞书云文档（lark-doc）→ 回读验证 → 交付 URL（可长期维护）；
+4. **步骤 3 云文档成稿 + 知识库挂载**：套 `templates/cloud-doc.xml` + 5 个 HTML block 图集
+   （总览/时间线/错因/进度/概念对照）→ 创建飞书云文档（lark-doc）→ 回读验证 →
+   `wiki +move` 挂入"BeachSOLO 复盘"知识空间（一份卷子 = 一个节点）→ 交付节点 URL；
+   **格式铁律**：资源用 bookmark 卡片内嵌预览（视频/原文可点开）、计划与小测用 checkbox
+   待办、图示化优先、正文去啰嗦；
 5. **步骤 4 变式实测**：文档内嵌小测+变式 → 用户回报对/错 → 掌握判定 / 补救闭环；
 6. **步骤 5 台账与画像**：DELIVERY-LOG.md 追加 + profile.json 增量 + 云文档更新日志；
 7. **步骤 6 处方**：按 resources.md 触发，绑定证据。

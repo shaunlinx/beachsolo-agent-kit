@@ -92,25 +92,33 @@ beachsolo/
 - 视频/文章类用可访问 URL 记录（分享链接或官方原文），来源必须可核验；
 - 讲解视频链接 + 权威原文链接一并写入云文档对应题目段落。
 
-## 步骤 3：云文档成稿（核心交付，artifact-first 的主产物）
+## 步骤 3：云文档成稿 + 知识库挂载（核心交付，artifact-first 的主产物）
 
-按 `DOCS/CLOUD-DOC-SPEC.md` 与 `templates/cloud-doc.xml` 生成**带教档案云文档**
-（可用 lark-doc 时创建飞书云文档；无云文档能力时降级为本地 HTML 档案，见附 C）。
+按 `DOCS/CLOUD-DOC-SPEC.md`（v2 格式铁律）与 `templates/cloud-doc.xml` 生成
+**带教档案云文档**，创建后挂入"BeachSOLO 复盘"知识空间（一份卷子 = 一个节点）：
+
+1. **格式铁律（用户验收标准）**：标题=判断句、正文≤3 行/节；外部资源用
+   `<bookmark>` 卡片内嵌预览（视频/原文可点开），音频用附件卡，图解用 `<img>`；
+   巩固计划与小测/变式用 `<checkbox>` 待办；4-5 张 HTML block 图集承载图示化
+   （含 concept 题的概念对照图 widget-concept）；
+2. **创建**：套 `templates/cloud-doc.xml`（变量替换）→ lark-doc +create →
+   回读验证（block/卡片/checkbox 均生效）；
+3. **挂知识库**：`lark-cli wiki +space-list --as user` 查"BeachSOLO 复盘"空间，
+   不存在则 `+space-create --name "BeachSOLO 复盘"`；随后
+   `lark-cli wiki +move --obj-type docx --obj-token <document_id> --target-space-id <space_id>`
+   把文档移入知识库（docs-to-wiki 模式），返回 node_token 即知识库节点——**一份卷子 = 一个
+   知识库节点**，长期累积、可跨卷检索复发错因；
+4. 交付知识库节点 URL（可长期维护）。
 
 文档结构（模板已定，按数据替换变量）：
-1. 开头摘要 callout（核心问题 + 3 条结论，≤300 字）
-2. 本次诊断结论（widget-overview + 结论段）
-3. 作答行为画像（widget-timeline + 行为点）
-4. 错因模式统计（widget-reasons + 错题明细表）
-5. 逐题带教档案（每题：考点 / 作答对照 / 确认错因 / 讲解+媒介 / 小测 / 变式判定）
-6. 掌握与待复查（widget-progress + 巩固计划表）
-7. 资源处方（按 resources.md 触发）
+1. 摘要 callout（1 行核心 + 3 条结论，≤150 字）
+2. 一图看懂本次复盘（widget-overview + 1 句注）
+3. 怎么答的（widget-timeline + 行为点 ul）
+4. 错在哪（widget-reasons + 错题精简表）
+5. 逐题带教（每题：作答/错因/讲解/资源卡片/小测/变式判定，见 CLOUD-DOC-SPEC §4）
+6. 掌握情况与巩固计划（widget-progress + checkbox 待办）
+7. 练习资源（bookmark 处方卡片）
 8. 更新日志（长期追加，不覆盖历史）
-9. 参考来源（编号链接，禁止裸 URL）
-
-HTML block 图集（4 张，模板见 `templates/widget-*.html`）：总览 / 时间线 / 错因分布 /
-进度，全部确定性绘制（纯 HTML/CSS/SVG，无外部依赖），嵌入文档对应章节。
-创建后必须回读验证（fetch），确认 4 个 HTML block 与链接均生效。
 
 ## 步骤 4：变式实测与掌握判定（轻量交互，不搞对话式教学）
 
