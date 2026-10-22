@@ -13,6 +13,14 @@
 <html5-block path="@./templates/widget-overview.html"/>
 <p>{{OVERVIEW_NOTE}}</p>
 
+<h1 seq="auto">带教课件</h1>
+<p>完整带教课件（{{PPT_PAGE_COUNT}} 页），点击卡片可在线打开：</p>
+<bookmark href="{{PPT_URL}}" title="带教课件 · {{PAPER_TITLE}}"/>
+<p>关键页预览：</p>
+<img path="@./shots/slide-cover.jpg" caption="封面 · 驱动问题"/>
+<img path="@./shots/slide-overview.jpg" caption="总览 · 统计归因"/>
+{{PPT_KEYPAGE_IMAGES}}
+
 <h1 seq="auto">怎么答的：{{BEHAVIOR_TAKEAWAY}}</h1>
 <html5-block path="@./templates/widget-timeline.html"/>
 <ul>
@@ -33,6 +41,18 @@
 <p>{{REASON_NOTE}}</p>
 
 <h1 seq="auto">逐题带教</h1>
+<!-- QUESTION_SECTIONS 动态生成，每题结构：
+<h2>第N题 · {{知识点}}</h2>
+<p>你的作答：{{your_answer}} · 正确：{{correct}}</p>
+<p>错因：{{reason_type}} · {{pitfall}}</p>
+<p>讲解：{{explanation}}</p>
+<p>讲解语音：<source path="@./media/qNNN-audio.mp3" name="第N题讲解.mp3"/></p>
+<p>拓展资源：<bookmark href="{{video_url}}" title="抖音讲解"/> <bookmark href="{{source_url}}" title="权威原文"/></p>
+<p>变式自测：</p>
+<checkbox done="false">{{variant_1}}</checkbox>
+<checkbox done="false">{{variant_2}}</checkbox>
+<checkbox done="false">{{variant_3}}</checkbox>
+-->
 {{QUESTION_SECTIONS}}
 
 <h1 seq="auto">掌握情况与巩固计划</h1>

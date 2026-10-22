@@ -2,39 +2,64 @@
 
 > 每份数据包必须产出的标准化交付物。**任何一件缺失 = 交付不完整**。
 > 交付顺序即清单顺序；验收对照本文件逐项勾选。
-> v7 起主交付为带教课件云 PPT，云文档降为辅交付。
+> v8 起唯一交付载体是云文档（知识库节点），PPT/音频/资源都是文档内内容形式。
 
 | # | 交付物 | 内容 | 存放/载体 | 验收标准 |
 |---|---|---|---|---|
-| ① | **带教课件云 PPT（知识库节点）** | 视觉带教课件（封面/统计归因/逐题讲解/小结），固定 A-3 专业版设计系统，挂入"BeachSOLO 复盘"知识空间 | 飞书幻灯片 + lark-wiki 节点 | 知识库节点 URL 可打开；页数=封面1+总览1+错题N+小结1（N≤6）；每页 lint passed；逐页截图无溢出/错位；每页有 note 讲稿；无 emoji/无 `<b>` 标签 |
-| ② | 云文档带教档案（知识库节点） | 长期维护的学习档案（摘要/一图看懂/行为/错因/逐题/进度/处方/日志），挂入同一知识空间 | 飞书云文档 + lark-wiki 节点（或降级 HTML 档案） | 知识库节点 URL 可打开；5 个 HTML block 渲染正常；bookmark 卡片可预览；checkbox 待办存在；更新日志含本次记录 |
-| ③ | 统计归因结论 | 错因模式分布（concept/memory/reasoning/careless + 占比）+ 关键数字 | PPT 总览页 + 云文档第 3/4 章 + reports/ 存档 | 数字与数据包可核对；结论有证据（选项差异+行为信号） |
-| ④ | 作答行为画像 | 节奏/取舍/流程三类行为结论（扫答、停驻、誊写等） | PPT 总览页行为链 + 云文档第 2 章 + profile.json.behaviorPatterns | 每条结论有事件流/用时依据 |
-| ⑤ | 逐题讲解 + 媒介（可预览内嵌） | 每题：作答对照/错因/讲解/富媒介（bookmark 视频·原文卡片 / img 图解 / 音频附件至少 1 种，内嵌可预览） | PPT 逐题页 + 云文档第 4 章 + media/ 归档 | PPT 每题 1 页（concept/memory/reasoning 对应模板）；文档每题含媒介且可预览；讲解回答"对在哪、错在哪" |
-| ⑥ | 小测与变式判定 | 每题 1 小测 + 2-3 变式（checkbox 待办），判定掌握/待复查 | 云文档内嵌 + variants/ | 变式有来源；判定写回文档与 profile；PPT 小结页反映掌握/待复查 |
-| ⑦ | 巩固计划 | 未掌握知识点 → 3 日计划（checkbox 待办：动作/检验/通过标准） | plans/ + 云文档第 5 章 + PPT 小结页巩固三步 | 计划为 checkbox 待办；PPT 小结页含 D1-D3；待复查项置顶下次会话 |
-| ⑧ | 知识库 + 画像更新 | knowledge/ 错题条目、profile.json 增量 | beachsolo/ | 同知识点历史可检索；processedSessions 已含本次 attemptId；PPT+文档均已挂库 |
-| ⑨ | 交付台账 | DELIVERY-LOG.md 追加本次记录 | beachsolo/DELIVERY-LOG.md | 按附 D 格式；只追加不改写历史；含 PPT 节点 URL |
+| ① | **云文档带教档案（知识库节点）** | 最终沉淀载体：摘要/统计图表/带教PPT(bookmark+截图)/逐题讲解(含音频附件+资源卡片)/变式自测/巩固计划/更新日志，挂入"BeachSOLO 复盘"知识空间 | 飞书云文档 + lark-wiki 节点（或降级 HTML 档案） | 知识库节点 URL 可打开；PPT bookmark 可点开；关键页截图嵌入正文；音频附件可播放；bookmark 资源卡片可预览；checkbox 待办存在；更新日志含本次记录 |
+| ② | 带教课件云 PPT（文档内内容形式） | 视觉带教课件（封面/统计归因/逐题讲解/变式题页/小结），固定 A-3 专业版设计系统，页数动态=N+3 | 飞书幻灯片（bookmark 嵌入文档 + 关键页截图嵌入正文） | slides URL 可打开；页数=封面1+总览1+逐题N+小结1；每页 lint passed；逐页截图无溢出/错位；每页有 note 讲稿；无 emoji/无 `<b>` 标签；不独立挂库 |
+| ③ | 统计归因结论 | 错因模式分布（concept/memory/reasoning/careless + 占比）+ 关键数字 | PPT 总览页 + 云文档图表 + reports/ 存档 | 数字与数据包可核对；结论有证据（选项差异+行为信号） |
+| ④ | 作答行为画像 | 节奏/取舍/流程三类行为结论（扫答、停驻、誊写等） | PPT 总览页行为链 + 云文档 + profile.json.behaviorPatterns | 每条结论有事件流/用时依据 |
+| ⑤ | 逐题讲解 + 媒介 | 每题：作答对照/错因/讲解/讲解语音(文档附件)/资源卡片(bookmark)/生图(嵌入PPT) | PPT 逐题页 + 云文档 + media/ 归档 | PPT 每题 1 页（concept/memory/reasoning 对应模板）；文档每题含音频附件+资源卡片；讲解回答"对在哪、错在哪" |
+| ⑥ | 小测与变式判定 | PPT 里题目页/答案页分离（翻页自测）+ 文档 checkbox 记录作答结果 | PPT 变式页 + 云文档 checkbox + variants/ | 变式有来源；判定写回文档与 profile；PPT 小结页反映掌握/待复查 |
+| ⑦ | 巩固计划 + 多维表格 | 未掌握知识点 → D+1/D+3/D+7 记忆曲线复习，集中维护在一个多维表格 | 「BeachSOLO 巩固任务」多维表格 + 云文档 checkbox | 表格已创建（首次）或复用（后续）；待复查项已写入；复习日期用工具计算；不每次生成独立 cron |
+| ⑧ | 知识库 + 画像更新 | knowledge/ 错题条目、profile.json 增量、多维表格 app_token 记录 | beachsolo/ | 同知识点历史可检索；processedSessions 已含本次 attemptId；文档已挂库；remediationTracker.app_token 已记录 |
+| ⑨ | 交付台账 | DELIVERY-LOG.md 追加本次记录 | beachsolo/DELIVERY-LOG.md | 按附 D 格式；只追加不改写历史；含文档知识库节点 URL |
 
-## PPT 专项验收（交付①的硬门槛）
+## 云文档专项验收（交付①的硬门槛）
 
-PPT 工作流完整契约见 `DOCS/SLIDES-WORKFLOW.md`，以下为交付前必查项：
+云文档是唯一交付载体，以下为交付前必查项：
+
+- [ ] 文档已挂入"BeachSOLO 复盘"知识库（`wiki +move --obj-type docx`）
+- [ ] PPT 以 `<bookmark href="slides_url">` 嵌入，可点开预览
+- [ ] PPT 关键页以 `<img>` 截图嵌入正文（用户不用跳走就能看核心内容）
+- [ ] 讲解语音以 `<source path="@./media/qNNN-audio.mp3">` 附件嵌入，可播放
+- [ ] 每题下方有 `<bookmark>` 资源卡片（抖音/B站/原文，至少 1 种）
+- [ ] 变式题以 `<checkbox>` 待办形式存在
+- [ ] 巩固计划 D1-D3 以 `<checkbox>` 待办形式存在
+- [ ] 统计图表以 `<html5-block>` 嵌入，渲染正常
+- [ ] 更新日志含本次记录
+
+## PPT 专项验收（交付②的硬门槛）
+
+PPT 工作流完整契约见 `DOCS/SLIDES-WORKFLOW.md`：
 
 - [ ] 设计系统：暖白底 rgb(245,240,235) + 勃垦第红 + 炭黑 + 赭石，思源宋体
-- [ ] 页型路由：concept→compare 模板 / memory→memory 模板 / reasoning→reasoning 模板
+- [ ] 页数动态 = N+3（N=实际复盘题数，不设上限）
+- [ ] 页型路由：concept→compare / memory→memory / reasoning→reasoning
 - [ ] 页序：封面→总览→错题（concept→memory→reasoning）→小结
 - [ ] 逐页 lint 通过（`status: passed`，无 errors）
 - [ ] 回读 XML 页数与预期一致
 - [ ] 逐页截图无文字溢出、无元素错位、无空白页
 - [ ] 每页 `<note>` 含 3-5 句讲稿
+- [ ] 变式题以"题目页/答案页"分离实现翻页自测
 - [ ] 所有数字来自数据包，无编造
-- [ ] 已挂入"BeachSOLO 复盘"知识库（`wiki +move --obj-type slides`）
-- [ ] present_files 交付的是知识库节点 URL（非 slides 原始 URL）
+- [ ] **不独立挂库、不独立交付**——URL 和截图交回主 agent 嵌入云文档
+
+## 多维表格专项验收（交付⑦的硬门槛）
+
+多维表格契约见 `DOCS/REMEDIATION-TRACKER.md`：
+
+- [ ] 表格名"BeachSOLO 巩固任务"，首次创建后 app_token 写入 profile.json
+- [ ] 字段完整：知识点/关联卷子/错因类型/三次复习日期/掌握状态/备注
+- [ ] 待复查知识点已逐条写入，复习日期用 calculator 计算（D+1/D+3/D+7）
+- [ ] 不重复写入（同知识点+同卷子已存在则更新状态）
+- [ ] 已掌握的标记状态，不删除
 
 ## 质量底线
 
 - **数字可复核**：每个关键数字来自数据包字段或可复现计算，口径一致。
 - **媒介可访问**：生成类产物已归档本地；链接在交付前验证可达（不可达则不交付并说明）。
 - **不堆砌**：媒介按错因路由表选择，每类只取最少必要数量；不为"丰富"重复生成。
-- **速度**：单数据包主流程一次会话完成；批量采集/生成并行；交互仅轻量确认点。
+- **速度**：单数据包主流程一次会话完成；媒介采集与 PPT 生成并行子 agent；交互仅轻量确认点。
 - **可复现**：PPT 必须用 `templates/slides/` 模板生成，禁止现场手搓无模板的 XML；模板缺失的页型先补模板再交付。

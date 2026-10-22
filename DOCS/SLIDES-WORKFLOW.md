@@ -1,8 +1,9 @@
-# SLIDES-WORKFLOW · 带教课件云 PPT 工作流契约（v7）
+# SLIDES-WORKFLOW · 带教课件云 PPT 工作流契约（v8）
 
 > 本文档定义：Agent 拿到数据包后，如何**标准化地**产出一份带教课件云 PPT。
+> PPT 是云文档的**内容形式**（bookmark 引用 + 截图嵌入），不是独立交付物。
 > 目标：任何具备 lark-cli 能力的 Agent，按本文档执行，都能复现同形态、同质量的 PPT。
-> 模板在 `templates/slides/`，共 6 个页型。
+> 模板在 `templates/slides/`，共 6 个页型，页数动态 = N+3。
 
 ---
 
@@ -35,9 +36,10 @@
 | careless 粗心誊写 | 不单独占页，写入对应题的 `your_answer` 字段 | — |
 | （小结） | `slide-06-summary.xml` | — |
 
-**页数规则**：封面 1 + 总览 1 + 错题讲解（每题 1 页，按错因选模板）+ 小结 1。
-- 最少 4 页（1 道错题）；错题超过 6 道时，只讲**错因最集中的前 6 道**，其余写入云文档辅交付。
-- 同错因题连续排列，concept → memory → reasoning 顺序。
+**页数规则（动态，不写死）**：
+- 总页数 = 封面 1 + 总览 1 + 逐题 N + 小结 1 = **N + 3**
+- N = 实际复盘题数：用户指定了题组（如组A）→ N = 题组题数；没指定 → N = 全部错题数
+- **不设上限**，题多就多页；同错因题连续排列，concept → memory → reasoning 顺序
 
 ---
 
@@ -94,19 +96,18 @@ lark-cli slides +screenshot --presentation "<id>" \
 - 无空白页或半空白页。
 发现问题 → `+update-slide` 或 `+delete-slide`+重写 → 重新截图。
 
-### Step 6 · 挂入知识库
+### Step 6 · 导出截图（供云文档嵌入）
+PPT **不独立挂知识库**——把关键页截图保存到本地，供步骤 3.2 云文档嵌入：
 ```bash
-# 查"BeachSOLO 复盘"空间，不存在则创建
-lark-cli wiki +space-list --as user --format json
-lark-cli wiki +space-create --name "BeachSOLO 复盘" --as user   # 仅当不存在
-# 挂载（slides 类型）
-lark-cli wiki +move --obj-type slides --obj-token "<xml_presentation_id>" \
-  --target-space-id "<space_id>" --format json
+lark-cli slides +screenshot --presentation "<id>" \
+  --slide-id <封面id> --slide-id <总览id> --slide-id <每题id> --output-dir shots/
 ```
-返回 `node_token` 即成功。知识库节点 URL = `https://<域名>/wiki/<node_token>`。
+截图用于云文档正文的 `<img>` 嵌入，让用户不用跳走就能看 PPT 核心内容。
 
-### Step 7 · 交付
-用 `present_files` 交付**知识库节点 URL**（不是 slides 原始 URL），附 1-2 句说明（页数、核心结论）。
+### Step 7 · 交回主 agent
+把 `xml_presentation_id`、`slides URL`、关键页截图路径交回主 agent，
+由主 agent 在步骤 3.2 嵌入云文档（`<bookmark href="URL">` + `<img>` 截图）。
+**PPT 不单独交付**。
 
 ---
 
@@ -153,8 +154,8 @@ lark-cli wiki +move --obj-type slides --obj-token "<xml_presentation_id>" \
 5. **每页必须有 `<note>`**（3-5 句讲稿，用户可直接照读）；
 6. **禁止 http 外链图**——需要图片先 `curl -L` 下载到本地，再 `+media-upload` 拿 `file_token`；本套模板默认无图，需要插图时遵守此规则；
 7. **页序固定**——封面→总览→错题→小结，不允许乱序；
-8. **必须挂知识库**——不挂知识库的 PPT 不算完成交付；
-9. **必须截图验收**——不截图 = 没验证视觉，禁止直接交付。
+8. **必须截图验收**——不截图 = 没验证视觉，禁止交回主 agent；
+9. **不独立挂库/不独立交付**——PPT 是云文档的内容形式，URL 和截图交回主 agent 嵌入文档。
 
 ---
 
@@ -162,18 +163,18 @@ lark-cli wiki +move --obj-type slides --obj-token "<xml_presentation_id>" \
 
 | 故障 | 降级方案 |
 |---|---|
-| lark-cli slides 不可用 | 主交付降级为云文档（v6.1 形态），在文档开头说明"PPT 生成失败，以文档代替" |
+| lark-cli slides 不可用 | 云文档里用 HTML block 做幻灯片效果（翻页式布局），在文档开头说明"PPT 生成失败，以图文代替" |
 | 单页 lint 反复报错（≥3 次） | 该页改用最简版式（标题+正文+锚点，去掉对照/四词布局），仍须 lint 通过 |
-| 知识库挂载失败 | 交付 slides 原始 URL，并在台账记录"未挂库，待重试" |
-| 截图工具不可用 | 用 `+xml-get` 回读 + `xml_inspect.py` 结构校验代替，交付时说明"未做视觉截图验收" |
+| 截图工具不可用 | 用 `+xml-get` 回读 + `xml_inspect.py` 结构校验代替，交回时说明"未做视觉截图验收" |
+| 生图不可用 | PPT 先用文字版，云文档里用对比表/SVG 图解代替 |
 
 任何降级必须在交付说明中明确告知用户，不允许静默降级。
 
 ---
 
-## 6. 验收清单（交付前逐项打勾）
+## 6. 验收清单（交回主 agent 前逐项打勾）
 
-- [ ] 页数 = 封面 1 + 总览 1 + 错题 N + 小结 1（N≤6）
+- [ ] 页数 = 封面 1 + 总览 1 + 错题 N + 小结 1（N=实际复盘题数，动态）
 - [ ] 每页 lint 通过（`status: passed`）
 - [ ] 回读 XML 页序正确
 - [ ] 逐页截图无溢出/错位/空白
@@ -181,6 +182,5 @@ lark-cli wiki +move --obj-type slides --obj-token "<xml_presentation_id>" \
 - [ ] 配色统一（暖白+勃垦第红+炭黑+赭石）
 - [ ] 无 emoji、无 `<b>` 标签
 - [ ] 所有数字来自数据包
-- [ ] 已挂入"BeachSOLO 复盘"知识库
-- [ ] present_files 交付知识库节点 URL
-- [ ] 台账已追加（`beachsolo/DELIVERY-LOG.md`）
+- [ ] 关键页截图已保存（供云文档嵌入）
+- [ ] slides URL 和截图路径已交回主 agent
