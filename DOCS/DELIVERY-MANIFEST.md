@@ -10,7 +10,7 @@
 | ② | 带教课件云 PPT（文档内内容形式） | 视觉带教课件（封面/统计归因/逐题讲解/变式题页/小结），固定 A-3 专业版设计系统，页数动态=N+3 | 飞书幻灯片（bookmark 嵌入文档 + 关键页截图嵌入正文） | slides URL 可打开；页数=封面1+总览1+逐题N+小结1；每页 lint passed；逐页截图无溢出/错位；每页有 note 讲稿；无 emoji/无 `<b>` 标签；不独立挂库 |
 | ③ | 统计归因结论 | 错因模式分布（concept/memory/reasoning/careless + 占比）+ 关键数字 | PPT 总览页 + 云文档图表 + reports/ 存档 | 数字与数据包可核对；结论有证据（选项差异+行为信号） |
 | ④ | 作答行为画像 | 节奏/取舍/流程三类行为结论（扫答、停驻、誊写等） | PPT 总览页行为链 + 云文档 + profile.json.behaviorPatterns | 每条结论有事件流/用时依据 |
-| ⑤ | 逐题讲解 + 媒介 | 每题：作答对照/错因/讲解/讲解语音(文档附件)/资源卡片(bookmark)/生图(嵌入PPT) | PPT 逐题页 + 云文档 + media/ 归档 | PPT 每题 1 页（concept/memory/reasoning 对应模板）；文档每题含音频附件+资源卡片；讲解回答"对在哪、错在哪" |
+| ⑤ | 逐题讲解 + 媒介 | 每题：作答对照/错因/讲解/讲解语音(文档附件)/讲解视频卡片(bookmark，抖音/B站为主)/生图(嵌入PPT) | PPT 逐题页 + 云文档 + media/ 归档 | PPT 每题 1 页（concept/memory/reasoning 对应模板）；文档每题含音频附件+至少1条讲解视频卡片；讲解回答"对在哪、错在哪" |
 | ⑥ | 小测与变式判定 | PPT 里题目页/答案页分离（翻页自测）+ 文档 checkbox 记录作答结果 | PPT 变式页 + 云文档 checkbox + variants/ | 变式有来源；判定写回文档与 profile；PPT 小结页反映掌握/待复查 |
 | ⑦ | 巩固计划 + 多维表格 | 未掌握知识点 → D+1/D+3/D+7 记忆曲线复习，集中维护在一个多维表格 | 「BeachSOLO 巩固任务」多维表格 + 云文档 checkbox | 表格已创建（首次）或复用（后续）；待复查项已写入；复习日期用工具计算；不每次生成独立 cron |
 | ⑧ | 知识库 + 画像更新 | knowledge/ 错题条目、profile.json 增量、多维表格 app_token 记录 | beachsolo/ | 同知识点历史可检索；processedSessions 已含本次 attemptId；文档已挂库；remediationTracker.app_token 已记录 |
@@ -24,7 +24,7 @@
 - [ ] PPT 以 `<bookmark href="slides_url">` 嵌入，可点开预览
 - [ ] PPT 关键页以 `<img>` 截图嵌入正文（用户不用跳走就能看核心内容）
 - [ ] 讲解语音以 `<source path="@./media/qNNN-audio.mp3">` 附件嵌入，可播放
-- [ ] 每题下方有 `<bookmark>` 资源卡片（抖音/B站/原文，至少 1 种）
+- [ ] 每题下方有 `<bookmark>` 讲解视频卡片（抖音/B站为主，至少 1 条，交付前验证可达）
 - [ ] 变式题以 `<checkbox>` 待办形式存在
 - [ ] 巩固计划 D1-D3 以 `<checkbox>` 待办形式存在
 - [ ] 统计图表以 `<html5-block>` 嵌入，渲染正常

@@ -47,7 +47,7 @@
 <p>错因：{{reason_type}} · {{pitfall}}</p>
 <p>讲解：{{explanation}}</p>
 <p>讲解语音：<source path="@./media/qNNN-audio.mp3" name="第N题讲解.mp3"/></p>
-<p>拓展资源：<bookmark href="{{video_url}}" title="抖音讲解"/> <bookmark href="{{source_url}}" title="权威原文"/></p>
+<p>拓展资源：<bookmark href="{{video_url}}" title="抖音讲解·{{知识点}}"/> <bookmark href="{{video_url2}}" title="B站讲解·{{知识点}}"/></p>
 <p>变式自测：</p>
 <checkbox done="false">{{variant_1}}</checkbox>
 <checkbox done="false">{{variant_2}}</checkbox>

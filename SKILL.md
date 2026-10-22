@@ -83,21 +83,24 @@ beachsolo/
 
 ## 步骤 2：媒介路由与资源采集（并行执行，一次拉齐）
 
-按错因类型路由媒介（路由表见 `MEDIA-PLAYBOOK.md`），**一次并行采集**全部所需媒介：
+按错因类型路由媒介（路由表见 `MEDIA-PLAYBOOK.md`），**一次并行采集**全部所需媒介。
+**核心原则：学习资源优先选讲解视频（抖音/B站），权威原文只作查证依据，不作主要学习资源。**
 
-| 错因类型 | 首选媒介 | 采集方式 |
-|---|---|---|
-| concept 概念混淆 | 概念对比图解（生图） | image_gen/image_edit → `media/qNNN-concept.png` |
-| memory 记忆/固定搭配 | 口诀音频 + 权威原文链接 | text_to_audio → 下载归档 `media/qNNN-mnemonic.mp3`；web_search 原文链接 |
-| reasoning 推理遗漏 | 推理链图解（生图或 SVG） | image_gen → `media/qNNN-reasoning.png` |
-| time 时政/时效 | 讲解视频 + 原文链接 | video_search（如抖音）返回分享 URL；web_search 权威原文 |
-| careless 流程失误 | 自查清单（不占知识教学） | 直接写入文档，不生成媒介 |
+| 错因类型 | 首选媒介 | 学习资源（标配） | 采集方式 |
+|---|---|---|---|
+| concept 概念混淆 | 概念对比图解（生图） | 讲解视频 1 条（抖音/B站） | image_gen → `media/qNNN-concept.png`；video_search 抖音/B站 |
+| memory 记忆/固定搭配 | 口诀音频 | 讲解视频 1 条（抖音/B站） | text_to_audio → 下载归档 `media/qNNN-audio.mp3`；video_search |
+| reasoning 推理遗漏 | 推理链图解（生图/SVG） | 讲解视频 1 条（抖音/B站） | image_gen → `media/qNNN-reasoning.png`；video_search |
+| time 时政/时效 | 讲解视频 | 讲解视频 1-2 条（抖音/B站） | video_search 抖音/B站 |
+| careless 流程失误 | 自查清单（不占知识教学） | — | 直接写入文档，不生成媒介 |
 
 **采集契约（硬规则，详见 `DOCS/TOOL-CONTRACTS.md`）**：
 - 生成类产物（图/音频）**必须下载到本地 `media/` 归档**后再交付/嵌入；
   临时短链（如 aka.doubaocdn.com）随时失效，**禁止直接交付**；
-- 视频/文章类用可访问 URL 记录（分享链接或官方原文），来源必须可核验；
-- 讲解视频链接 + 权威原文链接一并写入云文档对应题目段落。
+- **每道错题至少配 1 条讲解视频**（抖音/B站为主，优先选播放量高、讲解清晰的真题解析或口诀记忆类视频），
+  用 `<bookmark>` 卡片嵌入云文档对应题目段落；
+- 权威原文（gov.cn/people.com.cn 等）只作查证依据，需要时附链接，不作主要学习资源；
+- 视频链接在交付前验证可达（不可达则换一条，不交付死链）；
 - **带教课件 PPT 是云文档的内容形式，不在本步骤生成**——见步骤 3。
 
 ## 步骤 3：并行生成 → 云文档组装 → 多维表格（核心交付）
@@ -109,8 +112,8 @@ beachsolo/
 ├─ 子 agent A · 媒介采集（4 路并行）
 │   ├─ 生图：concept 题概念对比图（image_gen → media/qNNN-concept.png）
 │   ├─ 音频：每题讲解语音（text_to_audio → 下载归档 media/qNNN-audio.mp3）
-│   ├─ 视频检索：每道错题 1 条抖音/B站讲解（video_search → URL）
-│   └─ 原文检索：每道错题 1 条权威原文（web_search/fetch → URL）
+│   ├─ 视频检索：每道错题 1 条抖音/B站讲解视频（video_search → URL，优先播放量高的真题解析）
+│   └─ 查证检索：需要时查权威原文（web_search/fetch → URL，仅作查证依据）
 └─ 子 agent B · PPT 生成（不等媒介，先用文字版）
     ├─ 套 templates/slides/ 模板，动态页数 = 封面1 + 总览1 + 逐题N + 小结1
     ├─ 逐页 +add-slide + lint → 回读 → 截图
@@ -204,8 +207,8 @@ beachsolo/
 | 数据校验/统计 | scripts/*.mjs | 步骤 0/1 | reports/、结论 JSON |
 | 概念图解 | image_gen/image_edit | concept 错因 | media/qNNN-concept.png（下载归档，嵌入PPT） |
 | 讲解语音 | text_to_audio | 每题 | media/qNNN-audio.mp3（下载归档，文档附件） |
-| 讲解视频 | video_search | 每道错题 | 分享 URL（bookmark 嵌入文档） |
-| 权威原文 | web_search/fetch | 每道错题 | URL（bookmark 嵌入文档） |
+| 讲解视频 | video_search | 每道错题标配（抖音/B站为主） | 分享 URL（bookmark 嵌入文档） |
+| 查证原文 | web_search/fetch | 需要时查证（不作主要学习资源） | URL（附在文档参考来源） |
 | **带教课件 PPT** | **lark-cli slides（ppt skill）** | **步骤 3.1，文档内内容形式** | **飞书幻灯片 URL（bookmark 嵌入文档）** |
 | 云文档 | lark-doc | 步骤 3.2，最终交付载体 | 飞书文档 URL + 知识库节点 |
 | 多维表格 | lark-base | 步骤 3.3，巩固任务集中维护 | 「BeachSOLO 巩固任务」表格 |
