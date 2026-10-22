@@ -68,6 +68,18 @@ beachsolo/
 带教前用 Grep 检索 `knowledge/` 历史同知识点错题，命中即写进档案"复发提示"；
 同知识点已生成过的图解/音频直接复用（media/ 索引在 profile.json）。
 
+### 0.1 知识库与资源索引（首次创建·永久维护）
+
+首次使用时创建以下基础设施，记入 `profile.json`，以后复用不重复创建：
+
+1. **知识空间**「BeachSOLO 复盘」（`lark-cli wiki +space-create`，不存在才创建）；
+2. **资源索引云文档**（套 `templates/resource-index.xml`，预置 4 个工具链接：
+   政治常识/言语/数资/综合网盘），挂入知识空间根目录，作为固定入口；
+3. **多维表格**「BeachSOLO 巩固任务」（见 `DOCS/REMEDIATION-TRACKER.md`）。
+
+`profile.json` 记录：`wikiSpaceId` / `resourceIndexDocId` / `remediationTracker.appToken`。
+后续每次复盘直接复用，不重复创建。
+
 ## 步骤 1：统计归因（数据 → 结论，一次算完）
 
 1. `node scripts/generate-report.mjs <数据包路径>` 生成存档诊断报告；
@@ -101,6 +113,9 @@ beachsolo/
   用 `<bookmark>` 卡片嵌入云文档对应题目段落；
 - 权威原文（gov.cn/people.com.cn 等）只作查证依据，需要时附链接，不作主要学习资源；
 - 视频链接在交付前验证可达（不可达则换一条，不交付死链）；
+- **优质视频自动追加到资源索引**：检索到的讲解视频中，播放量 >1万 或讲解特别清晰的，
+  自动追加到「学习资源索引」云文档对应知识点分类下（`lark-cli docs +update` 追加 bookmark），
+  并更新资源索引的更新日志；
 - **带教课件 PPT 是云文档的内容形式，不在本步骤生成**——见步骤 3。
 
 ## 步骤 3：并行生成 → 云文档组装 → 多维表格（核心交付）
@@ -194,7 +209,9 @@ beachsolo/
 
 ## 步骤 7：交付
 
-- **唯一交付物**：云文档的知识库节点 URL（present_files 交付链接）；
+- **唯一交付物**：本次复盘云文档的知识库节点 URL（present_files 交付链接）；
+- 同时告知用户：知识库内还有「学习资源索引」固定入口（含工具链接+积累的优质视频）和
+  「巩固任务」多维表格（记忆曲线提醒），可在知识空间内直接访问；
 - PPT、音频、资源、变式、巩固计划都在文档内，不单独交付；
 - 告知用户：文档可长期维护，下次数据包直接发来即增量追加，待复查自动写入多维表格提醒。
 
@@ -212,7 +229,8 @@ beachsolo/
 | **带教课件 PPT** | **lark-cli slides（ppt skill）** | **步骤 3.1，文档内内容形式** | **飞书幻灯片 URL（bookmark 嵌入文档）** |
 | 云文档 | lark-doc | 步骤 3.2，最终交付载体 | 飞书文档 URL + 知识库节点 |
 | 多维表格 | lark-base | 步骤 3.3，巩固任务集中维护 | 「BeachSOLO 巩固任务」表格 |
-| 知识库挂载 | lark-cli wiki | 步骤 3.2 | 知识库节点（仅文档一个） |
+| 资源索引文档 | lark-doc | 步骤 0.1 首次创建，步骤 2 自动追加优质视频 | 「学习资源索引」云文档（知识库固定入口） |
+| 知识库挂载 | lark-cli wiki | 步骤 0.1/3.2 | 知识库节点（仅文档一个） |
 | 可视化 | doubao-visualization | HTML block 图集 | 嵌入云文档 |
 | 子 agent 并行 | create_agent / OrganizerAgent | 步骤 3.0，媒介采集+PPT 并行 | 缩短总耗时 |
 

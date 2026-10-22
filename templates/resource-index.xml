@@ -1,0 +1,46 @@
+<title>BeachSOLO 学习资源索引</title>
+
+<callout background-color="light-gray" border-color="gray">
+<p><b>说明：</b>本页是 BeachSOLO 复盘知识库的固定资源入口。工具类资源为预置应用链接，讲解视频为每次复盘自动积累的优质资源。点击卡片可直接打开。</p>
+</callout>
+
+<h1 seq="auto">工具类资源</h1>
+
+<h2>政治常识</h2>
+<bookmark href="https://scnxn527ul86.feishu.link/app/app_17g9haefb33?from=from_copylink" title="政治常识速记表 · 公式集 · 常识库"/>
+
+<h2>言语理解</h2>
+<bookmark href="https://scnxn527ul86.feishu.link/app/app_17g9seat9g7?from=from_copylink" title="言语理解专项练习"/>
+
+<h2>数量资料</h2>
+<bookmark href="https://scnxn527ul86.feishu.link/app/app_17g8zusv3va?from=from_copylink" title="数量关系 · 资料分析专项"/>
+
+<h2>综合网盘</h2>
+<bookmark href="https://scnxn527ul86.doubao.link/app/app_17gghfmavcp" title="综合学习资源网盘"/>
+
+<h1 seq="auto">优质讲解视频（按知识点积累）</h1>
+
+<h2>政治理论</h2>
+<!-- 每次复盘自动追加：<bookmark href="视频URL" title="知识点 · 平台 · 播放量"/> -->
+{{VIDEO_SECTION_POLITICAL}}
+
+<h2>言语理解</h2>
+{{VIDEO_SECTION_VERBAL}}
+
+<h2>数量关系</h2>
+{{VIDEO_SECTION_QUANT}}
+
+<h2>判断推理</h2>
+{{VIDEO_SECTION_LOGIC}}
+
+<h2>资料分析</h2>
+{{VIDEO_SECTION_DATA}}
+
+<h1 seq="auto">更新日志</h1>
+<table>
+<colgroup><col width="120px"/><col width="200px"/><col width="400px"/></colgroup>
+<thead><tr><th><p>日期</p></th><th><p>模块</p></th><th><p>新增资源</p></th></tr></thead>
+<tbody>
+{{LOG_ROWS}}
+</tbody>
+</table>
