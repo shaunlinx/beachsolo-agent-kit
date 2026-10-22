@@ -1,0 +1,74 @@
+<!-- slide-03-compare · 概念对照页（concept 错因通用，A-3 专业版）
+占位符：{{q_nav}} {{title}} {{left_name}} {{left_desc}} {{right_name}} {{right_desc}} {{your_answer}} {{pitfall}} {{anchor}}
+用途：concept 概念混淆题——左右对照两个易混概念，中间竖线分隔，下方作答/易混点/锚点。
+每页只讲一道题。多道 concept 题复制本模板，替换占位符即可。 -->
+<slide>
+  <style>
+    <fill><fillColor color="rgb(245,240,235)"/></fill>
+  </style>
+  <data>
+    <shape type="text" topLeftX="80" topLeftY="40" width="800" height="30">
+      <content textType="caption" fontSize="12" letterSpacing="1" color="rgba(160,137,104,1)">
+        <p>BEACHSOLO · {{q_nav}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="78" width="820" height="58">
+      <content textType="headline" fontSize="28" fontFamily="思源宋体" bold="true" color="rgba(43,47,54,1)" lineSpacing="multiple:1.25">
+        <p>{{title}}</p>
+      </content>
+    </shape>
+    <line startX="82" startY="150" endX="878" endY="150">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="176" width="380" height="34">
+      <content textType="body" fontSize="19" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)">
+        <p>{{left_name}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="216" width="380" height="110">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.35">
+        <p>{{left_desc}}</p>
+      </content>
+    </shape>
+
+    <line startX="486" startY="176" endX="486" endY="330">
+      <border color="rgba(160,137,104,0.6)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="520" topLeftY="176" width="360" height="34">
+      <content textType="body" fontSize="19" fontFamily="思源宋体" bold="true" color="rgba(43,47,54,1)">
+        <p>{{right_name}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="520" topLeftY="216" width="360" height="110">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.35">
+        <p>{{right_desc}}</p>
+      </content>
+    </shape>
+
+    <line startX="82" startY="352" endX="878" endY="352">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="370" width="820" height="52">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.35">
+        <p>{{your_answer}}</p>
+        <p>{{pitfall}}</p>
+      </content>
+    </shape>
+
+    <shape type="text" topLeftX="80" topLeftY="446" width="820" height="60">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" lineSpacing="multiple:1.4">
+        <p>记忆锚点：{{anchor}}</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body" fontSize="14">
+      <p>这一题考两个概念的定位差异。</p>
+      <p>你的错误是把两个概念的位置互换了——这是 concept 型错误的典型模式。</p>
+      <p>用记忆锚点把两个概念的区分固定下来，下次遇到变式不再靠猜。</p>
+    </content>
+  </note>
+</slide>

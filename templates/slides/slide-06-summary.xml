@@ -1,0 +1,68 @@
+<!-- slide-06-summary · 小结/迁移页（A-3 专业版）
+占位符：{{mastered_list}} {{pending_list}} {{actions}}
+用途：最后一页，收束本次复盘——已掌握/待复查/巩固三步，回答驱动问题。
+mastered_list / pending_list / actions 均为多行 <p> 内容（已含 <p> 标签）。 -->
+<slide>
+  <style>
+    <fill><fillColor color="rgb(245,240,235)"/></fill>
+  </style>
+  <data>
+    <shape type="text" topLeftX="80" topLeftY="40" width="800" height="30">
+      <content textType="caption" fontSize="12" letterSpacing="1" color="rgba(160,137,104,1)">
+        <p>BEACHSOLO · 复盘 · 收束</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="78" width="820" height="58">
+      <content textType="headline" fontSize="28" fontFamily="思源宋体" bold="true" color="rgba(43,47,54,1)" lineSpacing="multiple:1.25">
+        <p>{{summary_title}}</p>
+      </content>
+    </shape>
+    <line startX="82" startY="150" endX="878" endY="150">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="176" width="820" height="30">
+      <content textType="body" fontSize="18" fontFamily="思源宋体" bold="true" color="rgba(43,47,54,1)">
+        <p>已掌握（当场变式通过）</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="212" width="820" height="80">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.4">
+        {{mastered_list}}
+      </content>
+    </shape>
+
+    <shape type="text" topLeftX="80" topLeftY="300" width="820" height="34">
+      <content textType="body" fontSize="18" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)">
+        <p>待复查（变式再次答错 → 列入巩固）</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="338" width="820" height="40">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.4">
+        {{pending_list}}
+      </content>
+    </shape>
+
+    <line startX="82" startY="396" endX="878" endY="396">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="412" width="820" height="30">
+      <content textType="body" fontSize="18" fontFamily="思源宋体" bold="true" color="rgba(43,47,54,1)">
+        <p>巩固三步（下次练习前完成）</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="448" width="820" height="70">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.4">
+        {{actions}}
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body" fontSize="14">
+      <p>今天带教的结果：已掌握的知识点当场变式通过，待复查的进入巩固计划。</p>
+      <p>掌握的标准是换一道变式题能答对，不是"听懂了"。</p>
+      <p>三步巩固：先背口诀，再重做变式，最后限时练模块。</p>
+    </content>
+  </note>
+</slide>

@@ -1,0 +1,100 @@
+<!-- slide-04-memory · 固定搭配/记忆页（memory 错因通用，A-3 专业版）
+占位符：{{q_nav}} {{title}} {{term_1}} {{term_1_desc}} {{term_2}} {{term_2_desc}} {{term_3}} {{term_3_desc}} {{term_4}} {{term_4_desc}} {{your_answer}} {{pitfall}} {{anchor}} {{source}}
+用途：memory 型错题——四词/固定搭配横向排布，每个词配一句角色说明，原文顺序即记忆链。
+少于 4 词时，把多余列的占位符留空或合并列宽。 -->
+<slide>
+  <style>
+    <fill><fillColor color="rgb(245,240,235)"/></fill>
+  </style>
+  <data>
+    <shape type="text" topLeftX="80" topLeftY="40" width="800" height="30">
+      <content textType="caption" fontSize="12" letterSpacing="1" color="rgba(160,137,104,1)">
+        <p>BEACHSOLO · {{q_nav}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="78" width="820" height="58">
+      <content textType="headline" fontSize="28" fontFamily="思源宋体" bold="true" color="rgba(43,47,54,1)" lineSpacing="multiple:1.25">
+        <p>{{title}}</p>
+      </content>
+    </shape>
+    <line startX="82" startY="150" endX="878" endY="150">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="178" width="186" height="34">
+      <content textType="body" fontSize="19" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" textAlign="center">
+        <p>{{term_1}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="220" width="186" height="70">
+      <content textType="body" fontSize="14" fontFamily="思源宋体" color="rgba(43,47,54,1)" textAlign="center" lineSpacing="multiple:1.3">
+        <p>{{term_1_desc}}</p>
+      </content>
+    </shape>
+    <line startX="282" startY="178" endX="282" endY="300"><border color="rgba(160,137,104,0.5)" width="1"/></line>
+
+    <shape type="text" topLeftX="298" topLeftY="178" width="186" height="34">
+      <content textType="body" fontSize="19" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" textAlign="center">
+        <p>{{term_2}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="298" topLeftY="220" width="186" height="70">
+      <content textType="body" fontSize="14" fontFamily="思源宋体" color="rgba(43,47,54,1)" textAlign="center" lineSpacing="multiple:1.3">
+        <p>{{term_2_desc}}</p>
+      </content>
+    </shape>
+    <line startX="500" startY="178" endX="500" endY="300"><border color="rgba(160,137,104,0.5)" width="1"/></line>
+
+    <shape type="text" topLeftX="516" topLeftY="178" width="186" height="34">
+      <content textType="body" fontSize="19" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" textAlign="center">
+        <p>{{term_3}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="516" topLeftY="220" width="186" height="70">
+      <content textType="body" fontSize="14" fontFamily="思源宋体" color="rgba(43,47,54,1)" textAlign="center" lineSpacing="multiple:1.3">
+        <p>{{term_3_desc}}</p>
+      </content>
+    </shape>
+    <line startX="718" startY="178" endX="718" endY="300"><border color="rgba(160,137,104,0.5)" width="1"/></line>
+
+    <shape type="text" topLeftX="734" topLeftY="178" width="146" height="34">
+      <content textType="body" fontSize="19" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" textAlign="center">
+        <p>{{term_4}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="734" topLeftY="220" width="146" height="70">
+      <content textType="body" fontSize="14" fontFamily="思源宋体" color="rgba(43,47,54,1)" textAlign="center" lineSpacing="multiple:1.3">
+        <p>{{term_4_desc}}</p>
+      </content>
+    </shape>
+
+    <line startX="82" startY="326" endX="878" endY="326">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="342" width="820" height="52">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.35">
+        <p>{{your_answer}}</p>
+        <p>{{pitfall}}</p>
+      </content>
+    </shape>
+
+    <shape type="text" topLeftX="80" topLeftY="418" width="820" height="60">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" lineSpacing="multiple:1.4">
+        <p>记忆锚点：{{anchor}}</p>
+      </content>
+    </shape>
+
+    <shape type="text" topLeftX="80" topLeftY="486" width="820" height="26">
+      <content textType="caption" fontSize="12" color="rgba(160,137,104,1)">
+        <p>来源：{{source}}</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body" fontSize="14">
+      <p>这题考固定搭配，没有理解成本，纯粹靠记忆。</p>
+      <p>记忆锚点是原文顺序口诀——按此顺序背，出题怎么换都不怕。</p>
+    </content>
+  </note>
+</slide>

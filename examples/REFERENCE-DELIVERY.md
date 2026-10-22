@@ -1,7 +1,8 @@
 # 规范案例（REFERENCE DELIVERY）
 
-> 本文件记录一次**真实完整交付**（数据包 → 八件套 → 云文档），作为复现基准。
+> 本文件记录一次**真实完整交付**（数据包 → 九件套 → 云PPT + 云文档），作为复现基准。
 > 新数据包的内容不同，但流程、结构、模板完全一致。
+> v7 起主交付为带教课件云 PPT，云文档为辅交付。
 
 ## 案例一 · 2026-10-21 首诊（b1d1d07d）
 
@@ -22,7 +23,20 @@
   规范要求归档 media/）
 - 第 10 题（memory）→ 中国政府网《法治中国建设规划》原文 + 人大 70 周年讲话
 
-**云文档（步骤 3 主交付，v2 形态）**：
+**带教课件云 PPT（步骤 3.1 主交付，v7 形态）**：
+- 设计系统：A-3 问题牵引·专业版（暖白底 #F5F0EB + 勃垦第红 + 炭黑 + 赭石，思源宋体）
+- 知识库节点 URL：https://scnxn527ul86.feishu.cn/wiki/OPT5wWh5Li8zWNkhoFKcNHeinpR
+- 6 页结构：封面（驱动问题）→ 一图看懂（3 数字+行为链+错因分布）→
+  第1题对照（十个明确 vs 十四个坚持，compare 模板）→
+  第2题对照（政治建设 vs 思想建设，compare 模板）→
+  第10题记忆（立法格局四词，memory 模板）→
+  小结（掌握 2/待复查 1/巩固三步）
+- 模板对应：slide-01-cover / slide-02-overview / slide-03-compare ×2 /
+  slide-04-memory / slide-06-summary
+- 验收：6 页全部 lint passed；逐页截图无溢出/错位；每页有 note 讲稿；
+  已挂入"BeachSOLO 复盘"知识库（wiki +move --obj-type slides）
+
+**云文档（步骤 3.2 辅交付，v2 形态）**：
 - 知识库空间：BeachSOLO 复盘（space_id 7699172946908040454）
 - 知识库节点 URL：https://scnxn527ul86.feishu.cn/wiki/FYcJwf83nit9OSk1D3ecibMin0c
 - 结构：摘要 callout → 一图看懂（widget-overview）→ 怎么答的（timeline+行为点）→

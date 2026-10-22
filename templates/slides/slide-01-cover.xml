@@ -1,0 +1,40 @@
+<!-- slide-01-cover · 封面/引题页（A-3 专业版 · 党政配色）
+占位符：{{paper_title}} {{driving_question}} {{meta_line}}
+用途：每份复盘 PPT 第 1 页，用驱动问题拉着学习者走，不堆信息。 -->
+<slide>
+  <style>
+    <fill><fillColor color="rgb(245,240,235)"/></fill>
+  </style>
+  <data>
+    <shape type="text" topLeftX="80" topLeftY="104" width="800" height="40">
+      <content textType="caption" fontSize="13" letterSpacing="2" color="rgba(160,137,104,1)">
+        <p>BEACHSOLO · 答题复盘 · 首诊</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="150" width="820" height="120">
+      <content textType="title" fontSize="46" fontFamily="思源宋体" bold="true" color="rgba(43,47,54,1)" lineSpacing="multiple:1.2">
+        <p>{{paper_title}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="82" topLeftY="300" width="820" height="70">
+      <content textType="sub-headline" fontSize="21" fontFamily="思源宋体" color="rgba(139,38,53,1)">
+        <p>{{driving_question}}</p>
+      </content>
+    </shape>
+    <line startX="82" startY="398" endX="878" endY="398">
+      <border color="rgba(160,137,104,0.6)" width="1"/>
+    </line>
+    <shape type="text" topLeftX="82" topLeftY="420" width="820" height="36">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)">
+        <p>{{meta_line}}</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body" fontSize="14">
+      <p>这份复盘来自你在 BeachSOLO 完成的一套全真模拟。</p>
+      <p>今天不批评分数，先一起回答一个问题：这个结果，是知识点没掌握，还是作答策略崩了？</p>
+      <p>后面几页先给数据结论，再逐题带教，最后给出巩固计划。</p>
+    </content>
+  </note>
+</slide>

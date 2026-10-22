@@ -1,0 +1,90 @@
+<!-- slide-05-reasoning · 推理链页（reasoning 错因通用，A-3 专业版）
+占位符：{{q_nav}} {{title}} {{step_1}} {{step_1_desc}} {{step_2}} {{step_2_desc}} {{step_3}} {{step_3_desc}} {{your_answer}} {{pitfall}} {{anchor}}
+用途：reasoning 推理遗漏题——三步推导链横向排布，每步一个判断节点，还原推理过程。
+少于 3 步时合并或留空。 -->
+<slide>
+  <style>
+    <fill><fillColor color="rgb(245,240,235)"/></fill>
+  </style>
+  <data>
+    <shape type="text" topLeftX="80" topLeftY="40" width="800" height="30">
+      <content textType="caption" fontSize="12" letterSpacing="1" color="rgba(160,137,104,1)">
+        <p>BEACHSOLO · {{q_nav}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="78" width="820" height="58">
+      <content textType="headline" fontSize="28" fontFamily="思源宋体" bold="true" color="rgba(43,47,54,1)" lineSpacing="multiple:1.25">
+        <p>{{title}}</p>
+      </content>
+    </shape>
+    <line startX="82" startY="150" endX="878" endY="150">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="178" width="60" height="40">
+      <content textType="body" fontSize="28" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" textAlign="center">
+        <p>①</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="150" topLeftY="178" width="220" height="120">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.35">
+        <p><span bold="true">{{step_1}}</span></p>
+        <p>{{step_1_desc}}</p>
+      </content>
+    </shape>
+    <line startX="380" startY="220" endX="430" endY="220">
+      <border color="rgba(160,137,104,0.8)" width="2"/>
+      <endArrow type="arrow"/>
+    </line>
+
+    <shape type="text" topLeftX="440" topLeftY="178" width="60" height="40">
+      <content textType="body" fontSize="28" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" textAlign="center">
+        <p>②</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="510" topLeftY="178" width="220" height="120">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.35">
+        <p><span bold="true">{{step_2}}</span></p>
+        <p>{{step_2_desc}}</p>
+      </content>
+    </shape>
+    <line startX="740" startY="220" endX="790" endY="220">
+      <border color="rgba(160,137,104,0.8)" width="2"/>
+      <endArrow type="arrow"/>
+    </line>
+
+    <shape type="text" topLeftX="800" topLeftY="178" width="60" height="40">
+      <content textType="body" fontSize="28" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" textAlign="center">
+        <p>③</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="310" width="820" height="50">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.35">
+        <p><span bold="true">{{step_3}}</span> — {{step_3_desc}}</p>
+      </content>
+    </shape>
+
+    <line startX="82" startY="376" endX="878" endY="376">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="392" width="820" height="52">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.35">
+        <p>{{your_answer}}</p>
+        <p>{{pitfall}}</p>
+      </content>
+    </shape>
+
+    <shape type="text" topLeftX="80" topLeftY="462" width="820" height="50">
+      <content textType="body" fontSize="16" fontFamily="思源宋体" bold="true" color="rgba(139,38,53,1)" lineSpacing="multiple:1.4">
+        <p>推理锚点：{{anchor}}</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body" fontSize="14">
+      <p>这题考推理链，不是记忆。把推导过程拆成三步，每步一个判断。</p>
+      <p>你的错误出现在哪一步，就在那一步补判断依据。</p>
+    </content>
+  </note>
+</slide>

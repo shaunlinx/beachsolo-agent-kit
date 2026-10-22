@@ -1,0 +1,76 @@
+<!-- slide-02-overview · 一图看懂/统计归因页（A-3 专业版）
+占位符：{{score}} {{score_label}} {{answered}} {{answered_label}} {{accuracy}} {{accuracy_label}} {{behavior_chain}} {{reason_dist}} {{source_line}}
+用途：第 2 页，用 3 个大数字 + 行为链 + 错因分布，一页讲清"这次答题发生了什么"。 -->
+<slide>
+  <style>
+    <fill><fillColor color="rgb(245,240,235)"/></fill>
+  </style>
+  <data>
+    <shape type="text" topLeftX="80" topLeftY="40" width="800" height="30">
+      <content textType="caption" fontSize="12" letterSpacing="1" color="rgba(160,137,104,1)">
+        <p>BEACHSOLO · 复盘 02/06</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="78" width="820" height="56">
+      <content textType="headline" fontSize="30" fontFamily="思源宋体" bold="true" color="rgba(43,47,54,1)">
+        <p>{{overview_title}}</p>
+      </content>
+    </shape>
+    <line startX="82" startY="146" endX="878" endY="146">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="180" width="213" height="110">
+      <content textType="body" fontSize="40" bold="true" color="rgba(139,38,53,1)" textAlign="left">
+        <p>{{score}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="286" width="213" height="30">
+      <content textType="body" fontSize="14" color="rgba(43,47,54,1)"><p>{{score_label}}</p></content>
+    </shape>
+
+    <shape type="text" topLeftX="374" topLeftY="180" width="213" height="110">
+      <content textType="body" fontSize="40" bold="true" color="rgba(139,38,53,1)" textAlign="left">
+        <p>{{answered}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="374" topLeftY="286" width="213" height="30">
+      <content textType="body" fontSize="14" color="rgba(43,47,54,1)"><p>{{answered_label}}</p></content>
+    </shape>
+
+    <shape type="text" topLeftX="668" topLeftY="180" width="213" height="110">
+      <content textType="body" fontSize="40" bold="true" color="rgba(139,38,53,1)" textAlign="left">
+        <p>{{accuracy}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="668" topLeftY="286" width="213" height="30">
+      <content textType="body" fontSize="14" color="rgba(43,47,54,1)"><p>{{accuracy_label}}</p></content>
+    </shape>
+
+    <line startX="82" startY="340" endX="878" endY="340">
+      <border color="rgba(160,137,104,0.5)" width="1"/>
+    </line>
+
+    <shape type="text" topLeftX="80" topLeftY="356" width="820" height="50">
+      <content textType="body" fontSize="17" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.3">
+        <p>作答过程：{{behavior_chain}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="416" width="820" height="50">
+      <content textType="body" fontSize="17" fontFamily="思源宋体" color="rgba(43,47,54,1)" lineSpacing="multiple:1.3">
+        <p>错因分布：{{reason_dist}}</p>
+      </content>
+    </shape>
+    <shape type="text" topLeftX="80" topLeftY="476" width="820" height="30">
+      <content textType="caption" fontSize="12" color="rgba(160,137,104,1)">
+        <p>{{source_line}}</p>
+      </content>
+    </shape>
+  </data>
+  <note>
+    <content textType="body" fontSize="14">
+      <p>三个数字先摆事实，关键不是分数而是过程。</p>
+      <p>错因分布显示哪类错误占比最高——这决定了后面带教用什么媒介。</p>
+    </content>
+  </note>
+</slide>
