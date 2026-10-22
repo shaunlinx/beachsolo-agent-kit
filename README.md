@@ -38,6 +38,18 @@ git clone https://github.com/shaunlinx/beachsolo-agent-kit.git ~/.claude/skills/
 将本仓库 `SKILL.md` 作为技能文件/系统提示词提供给 Agent，并确认 Agent 具备
 文件读写、联网检索、生图/音频/云文档等工具（缺失时按 SKILL.md 附 C 降级链处理）。
 
+## 版本更新
+
+GitHub 迭代后，已安装的本地副本不会自动同步。更新方式：
+
+```bash
+cd <技能安装目录>/beachsolo-agent-kit
+git pull origin master
+```
+
+当前版本见 `SKILL.md` 头部 `version` 字段。v8.3 起，SKILL.md 头部含硬禁令与交付前检查清单，
+旧版本（≤v8.2）缺少这些强制约束，可能导致 Agent 走回对话式教学老路，建议及时更新。
+
 ---
 
 ## 仓库结构（v6）

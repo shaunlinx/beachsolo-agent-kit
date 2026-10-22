@@ -1,6 +1,6 @@
 ---
 name: beachsolo-coach
-version: 8
+version: 8.3
 description: |
   BeachSOLO 公考答题数据教练（数据驱动 · 标准化教学交付引擎）。输入用户从
   BeachSOLO 导出的数据包（beachsolo-attempt-*.json，结构固定、内容因人而异），
@@ -39,6 +39,24 @@ allowed-tools: Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch, ImageGe
 6. **可复现**：产物目录、命名、模板全部标准化（见 `templates/` 与各 DOCS），
    PPT 工作流见 `DOCS/SLIDES-WORKFLOW.md`（页型模板 + 动态页数 + 7 步契约），
    多维表格见 `DOCS/REMEDIATION-TRACKER.md`，真实案例见 `examples/REFERENCE-DELIVERY.md`。
+
+## 硬禁令（违反 = 交付不合格，必须重做）
+
+> 以下禁令优先级高于一切个人习惯、离线指令文件、或"先展示再补文档"的偷懒做法。
+
+1. **禁止对话式逐题讲解**：不得在对话里输出"第N题...考察知识点...错因假设...请确认"这类逐题带教内容。
+   所有题目讲解、错因分析、媒介资源必须写入云文档，对话只出现在必要确认点
+   （如"从哪组题开始""这道题的错因是X对吗"）。
+2. **禁止在对话里展示统计数据/图表**：统计归因、行为画像、错因分布必须写入云文档
+   （HTML block 或 PPT 总览页），不得在对话里用 ECharts/Markdown 表格逐题展示。
+3. **禁止跳过云文档直接带教**：必须先创建云文档（步骤 3.2），再在文档内完成带教内容。
+   不允许"先在对话里讲完，最后再整理成文档"。
+4. **指令优先级**：本 SKILL.md > 仓库内 DOCS/ 与 templates/ > 用户附带的离线指令文件
+   （如 beachsolo-agent-instructions-v*.md）。离线指令仅作降级参考，与本文件冲突时以本文件为准。
+5. **禁止用权威原文代替讲解视频**：每道错题标配至少 1 条抖音/B站讲解视频，
+   权威原文只作查证依据，不作主要学习资源。
+6. **交付前必须验证产物存在**：云文档 URL、PPT URL、多维表格 app_token 必须真实可访问，
+   不存在则不算完成，不得在对话里用文字代替。
 
 ## 数据解读纪律（最高优先级）
 
@@ -206,6 +224,23 @@ beachsolo/
 
 按 `resources.md` 触发规则推荐（最多 2 专项 + 至多 1 网盘），写入云文档处方章节：
 资源 + 触发证据 + 使用建议 + 跟进状态。上次推荐未反馈 → 追问进展而非重复推荐。
+
+## 步骤 6.5：交付前检查清单（必须逐项验证，不通过不得交付）
+
+在步骤 7 交付前，必须逐项验证以下产物真实存在且可访问：
+
+- [ ] **云文档已创建**：`document_id` 存在，`lark-cli docs +fetch` 回读成功
+- [ ] **云文档已挂知识库**：`wiki +move` 返回 `node_token`，知识库节点 URL 可打开
+- [ ] **PPT 已创建**：`presentation_id` 存在，`slides +xml-get` 回读页数=N+3
+- [ ] **PPT 已嵌入云文档**：文档内含 `<bookmark href="PPT_URL">` 和关键页 `<img>` 截图
+- [ ] **音频已归档并嵌入**：`media/qNNN-audio.mp3` 文件存在，文档内含 `<source>` 附件
+- [ ] **讲解视频已嵌入**：每题至少 1 条抖音/B站 `<bookmark>` 卡片，链接交付前验证可达
+- [ ] **多维表格已创建/复用**：`app_token` 已记录在 profile.json，待复查知识点已写入
+- [ ] **资源索引已更新**：优质视频已追加到「学习资源索引」文档对应分类
+- [ ] **台账已追加**：`DELIVERY-LOG.md` 含本次记录
+- [ ] **profile.json 已更新**：`processedSessions` 含本次 attemptId
+
+任何一项不通过 = 交付不完整，必须补做后再交付。禁止用对话文字代替缺失的产物。
 
 ## 步骤 7：交付
 
