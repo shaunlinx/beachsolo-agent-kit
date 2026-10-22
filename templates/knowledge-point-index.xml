@@ -1,0 +1,59 @@
+<title>BeachSOLO 考察点索引</title>
+
+<callout background-color="light-gray" border-color="gray">
+<p><b>说明：</b>本页是所有考察点的总索引。每个考察点对应一个独立文档，汇总了该知识点的定义、易混点、相关真题、用户笔记。冲刺复习时按"掌握状态"筛选，重点看未掌握和学习中的考察点。</p>
+</callout>
+
+<h1 seq="auto">常识判断</h1>
+<table>
+<colgroup><col width="200px"/><col width="100px"/><col width="100px"/><col width="200px"/></colgroup>
+<thead><tr><th><p>考察点</p></th><th><p>关联卷子</p></th><th><p>掌握状态</p></th><th><p>文档</p></th></tr></thead>
+<tbody>
+{{COMMONSENSE_ROWS}}
+</tbody>
+</table>
+
+<h1 seq="auto">言语理解与表达</h1>
+<table>
+<colgroup><col width="200px"/><col width="100px"/><col width="100px"/><col width="200px"/></colgroup>
+<thead><tr><th><p>考察点</p></th><th><p>关联卷子</p></th><th><p>掌握状态</p></th><th><p>文档</p></th></tr></thead>
+<tbody>
+{{VERBAL_ROWS}}
+</tbody>
+</table>
+
+<h1 seq="auto">数量关系</h1>
+<table>
+<colgroup><col width="200px"/><col width="100px"/><col width="100px"/><col width="200px"/></colgroup>
+<thead><tr><th><p>考察点</p></th><th><p>关联卷子</p></th><th><p>掌握状态</p></th><th><p>文档</p></th></tr></thead>
+<tbody>
+{{QUANT_ROWS}}
+</tbody>
+</table>
+
+<h1 seq="auto">判断推理</h1>
+<table>
+<colgroup><col width="200px"/><col width="100px"/><col width="100px"/><col width="200px"/></colgroup>
+<thead><tr><th><p>考察点</p></th><th><p>关联卷子</p></th><th><p>掌握状态</p></th><th><p>文档</p></th></tr></thead>
+<tbody>
+{{LOGIC_ROWS}}
+</tbody>
+</table>
+
+<h1 seq="auto">资料分析</h1>
+<table>
+<colgroup><col width="200px"/><col width="100px"/><col width="100px"/><col width="200px"/></colgroup>
+<thead><tr><th><p>考察点</p></th><th><p>关联卷子</p></th><th><p>掌握状态</p></th><th><p>文档</p></th></tr></thead>
+<tbody>
+{{DATA_ROWS}}
+</tbody>
+</table>
+
+<h1 seq="auto">更新日志</h1>
+<table>
+<colgroup><col width="120px"/><col width="160px"/><col width="400px"/></colgroup>
+<thead><tr><th><p>日期</p></th><th><p>卷子</p></th><th><p>更新内容</p></th></tr></thead>
+<tbody>
+{{LOG_ROWS}}
+</tbody>
+</table>

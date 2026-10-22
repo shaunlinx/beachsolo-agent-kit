@@ -1,0 +1,44 @@
+<title>{{KNOWLEDGE_POINT_NAME}}</title>
+
+<callout background-color="light-gray" border-color="gray">
+<p><b>考察点</b>：{{KNOWLEDGE_POINT_NAME}} ｜ <b>模块</b>：{{MODULE}} ｜ <b>掌握状态</b>：{{MASTERY_STATUS}} ｜ <b>关联卷子</b>：{{PAPER_COUNT}} 份</p>
+</callout>
+
+<h1 seq="auto">定义与边界</h1>
+<p>{{DEFINITION}}</p>
+<p><b>不是什么</b>：{{NOT_WHAT}}</p>
+<p><b>适用场景</b>：{{USE_CASE}}</p>
+
+<h1 seq="auto">易混点与相近词</h1>
+<table>
+<colgroup><col width="120px"/><col width="200px"/><col width="200px"/><col width="200px"/></colgroup>
+<thead><tr><th><p>词语</p></th><th><p>含义</p></th><th><p>区别</p></th><th><p>例句</p></th></tr></thead>
+<tbody>
+{{CONFUSABLE_ROWS}}
+</tbody>
+</table>
+<p><b>常见陷阱</b>：{{TRAPS}}</p>
+
+<h1 seq="auto">权威来源</h1>
+<p>{{SOURCE_NOTE}}</p>
+{{SOURCE_BOOKMARKS}}
+
+<h1 seq="auto">相关真题</h1>
+{{RELATED_QUESTIONS}}
+
+<h1 seq="auto">优质学习资源</h1>
+{{VIDEO_BOOKMARKS}}
+
+<h1 seq="auto">我的笔记</h1>
+<callout background-color="light-yellow" border-color="yellow">
+<p>（在此记录你的学习心得、口诀、易错点提醒——冲刺时这是你的核心复习材料）</p>
+</callout>
+
+<h1 seq="auto">更新日志</h1>
+<table>
+<colgroup><col width="120px"/><col width="160px"/><col width="400px"/></colgroup>
+<thead><tr><th><p>日期</p></th><th><p>关联卷子</p></th><th><p>更新内容</p></th></tr></thead>
+<tbody>
+{{LOG_ROWS}}
+</tbody>
+</table>

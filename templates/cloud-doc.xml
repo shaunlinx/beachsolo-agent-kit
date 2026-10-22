@@ -1,7 +1,7 @@
 <title>BeachSOLO 复盘 · {{PAPER_TITLE}}</title>
 
 <callout background-color="light-gray" border-color="gray">
-<p><b>核心：</b>{{SUMMARY_ONE_LINE}}</p>
+<p><b>核心结论：</b>{{SUMMARY_ONE_LINE}}</p>
 <ol>
 <li>{{S1}}</li>
 <li>{{S2}}</li>
@@ -9,49 +9,71 @@
 </ol>
 </callout>
 
-<h1 seq="auto">一图看懂本次复盘</h1>
+<h1 seq="auto">深度归因</h1>
 <html5-block path="@./templates/widget-overview.html"/>
 <p>{{OVERVIEW_NOTE}}</p>
+<h2>用时与节奏</h2>
+<ul>
+<li>{{TIME_INSIGHT_1}}</li>
+<li>{{TIME_INSIGHT_2}}</li>
+</ul>
+<h2>改答与誊写</h2>
+<ul>
+<li>{{CHANGE_INSIGHT_1}}</li>
+</ul>
+<h2>蒙题与放弃</h2>
+<ul>
+<li>{{GUESS_INSIGHT_1}}</li>
+<li>{{ABANDON_INSIGHT_1}}</li>
+</ul>
+
+<h1 seq="auto">模块能力画像</h1>
+<html5-block path="@./templates/widget-reasons.html"/>
+<table>
+<colgroup><col width="120px"/><col width="80px"/><col width="80px"/><col width="80px"/><col width="80px"/><col width="200px"/></colgroup>
+<thead><tr><th><p>模块</p></th><th><p>正确率</p></th><th><p>均时</p></th><th><p>蒙题率</p></th><th><p>放弃率</p></th><th><p>诊断</p></th></tr></thead>
+<tbody>
+{{MODULE_TABLE_ROWS}}
+</tbody>
+</table>
+
+<h1 seq="auto">全题四分类</h1>
+<table>
+<colgroup><col width="80px"/><col width="100px"/><col width="120px"/><col width="300px"/></colgroup>
+<thead><tr><th><p>分类</p></th><th><p>题数</p></th><th><p>题号</p></th><th><p>复盘策略</p></th></tr></thead>
+<tbody>
+<tr><td><p>错题</p></td><td><p>{{WRONG_COUNT}}</p></td><td><p>{{WRONG_IDS}}</p></td><td><p>深度带教：错因+考察点+技巧+视频+变式</p></td></tr>
+<tr><td><p>蒙对题</p></td><td><p>{{GUESSED_COUNT}}</p></td><td><p>{{GUESSED_IDS}}</p></td><td><p>当错题处理：知识点没掌握，必须带教</p></td></tr>
+<tr><td><p>犹豫题</p></td><td><p>{{HESITATED_COUNT}}</p></td><td><p>{{HESITATED_IDS}}</p></td><td><p>考点巩固：确认掌握+变式1道</p></td></tr>
+<tr><td><p>稳对题</p></td><td><p>{{STABLE_COUNT}}</p></td><td><p>{{STABLE_IDS}}</p></td><td><p>只做考点拓展：相近词/易混点/相关真题</p></td></tr>
+</tbody>
+</table>
 
 <h1 seq="auto">带教课件</h1>
 <p>完整带教课件（{{PPT_PAGE_COUNT}} 页），点击卡片可在线打开：</p>
 <bookmark href="{{PPT_URL}}" title="带教课件 · {{PAPER_TITLE}}"/>
 <p>关键页预览：</p>
 <img path="@./shots/slide-cover.jpg" caption="封面 · 驱动问题"/>
-<img path="@./shots/slide-overview.jpg" caption="总览 · 统计归因"/>
+<img path="@./shots/slide-overview.jpg" caption="总览 · 深度归因"/>
 {{PPT_KEYPAGE_IMAGES}}
-
-<h1 seq="auto">怎么答的：{{BEHAVIOR_TAKEAWAY}}</h1>
-<html5-block path="@./templates/widget-timeline.html"/>
-<ul>
-<li>{{B1}}</li>
-<li>{{B2}}</li>
-<li>{{B3}}</li>
-</ul>
-
-<h1 seq="auto">错在哪：{{REASON_TAKEAWAY}}</h1>
-<html5-block path="@./templates/widget-reasons.html"/>
-<table>
-<colgroup><col width="80px"/><col width="160px"/><col width="240px"/><col width="180px"/></colgroup>
-<thead><tr><th><p>题</p></th><th><p>错因</p></th><th><p>依据（选项差异）</p></th><th><p>状态</p></th></tr></thead>
-<tbody>
-{{MISTAKE_TABLE_ROWS}}
-</tbody>
-</table>
-<p>{{REASON_NOTE}}</p>
 
 <h1 seq="auto">逐题带教</h1>
 <!-- QUESTION_SECTIONS 动态生成，每题结构：
-<h2>第N题 · {{知识点}}</h2>
-<p>你的作答：{{your_answer}} · 正确：{{correct}}</p>
-<p>错因：{{reason_type}} · {{pitfall}}</p>
-<p>讲解：{{explanation}}</p>
-<p>讲解语音：<source path="@./media/qNNN-audio.mp3" name="第N题讲解.mp3"/></p>
-<p>拓展资源：<bookmark href="{{video_url}}" title="抖音讲解·{{知识点}}"/> <bookmark href="{{video_url2}}" title="B站讲解·{{知识点}}"/></p>
-<p>变式自测：</p>
-<checkbox done="false">{{variant_1}}</checkbox>
-<checkbox done="false">{{variant_2}}</checkbox>
-<checkbox done="false">{{variant_3}}</checkbox>
+<h2>第N题 · {{知识点}}【{{分类：错题/蒙对/犹豫/稳对}}】</h2>
+<p>考察点：<cite type="doc" doc-id="{{KP_DOC_ID}}">{{考察点名称}}</cite></p>
+<p>你的作答：{{your_answer}} · 正确：{{correct}} · 用时：{{elapsed}}s</p>
+<p>错因：{{reason_type}} · {{pitfall}} · 行为依据：{{behavior_evidence}}</p>
+<p>讲解（考察点知识+答题技巧双角度）：{{explanation}}</p>
+<p>拓展资源：<bookmark href="{{video_url}}" title="抖音讲解·{{考察点}}"/> <bookmark href="{{video_url2}}" title="B站讲解·{{考察点}}"/></p>
+<p>变式自测（标准选择题）：</p>
+<p>{{variant_stem}}</p>
+<p>A. {{variant_a}}  B. {{variant_b}}  C. {{variant_c}}  D. {{variant_d}}</p>
+<p>答案：{{variant_answer}} · 解析：{{variant_analysis}}</p>
+<checkbox done="false">变式题已完成，答对</checkbox>
+<checkbox done="false">变式题已完成，答错（需二次补救）</checkbox>
+<callout background-color="light-yellow" border-color="yellow">
+<p><b>我的笔记：</b>（在此记录学习心得、口诀、易错点——会同步到考察点文档）</p>
+</callout>
 -->
 {{QUESTION_SECTIONS}}
 
